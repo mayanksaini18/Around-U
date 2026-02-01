@@ -9,9 +9,9 @@ export default function Navbar() {
         <div className="flex items-center gap-8">
           <Link href="/" className="text-xl font-bold text-blue-600">Around-U</Link>
           <div className="hidden md:flex gap-6 text-sm font-medium text-gray-600">
-            <Link href="#">Find providers</Link>
-            <Link href="#">Service providers</Link>
-            <Link href="#">Contact us</Link>
+            <Link href="#how-it-works">Find providers</Link>
+            <Link href="#features">Service providers</Link>
+            <Link href="#faq">Contact us</Link>
           </div>
         </div>
         <div className="flex gap-4">

@@ -7,24 +7,27 @@ const reviews = [
     author: "Amit Patel",
     role: "Homeowner, Bangalore",
     rating: 5,
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
   },
   {
     quote: "The carpenter understood what I wanted and got it right the first time.",
     author: "Neha Singh",
     role: "Office Manager, Pune",
     rating: 5,
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200",
   },
   {
     quote: "Found a tutor for my son in my neighborhood. Couldn't ask for better.",
     author: "Vikram Desai",
     role: "Parent, Hyderabad",
     rating: 5,
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
   },
 ];
 
 export default function Testimonials() {
   return (
-    <section className="py-24 bg-gray-50">
+    <section id="testimonials" className="py-24 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold sm:text-4xl">Real feedback</h2>
@@ -43,7 +46,11 @@ export default function Testimonials() {
                 "{review.quote}"
               </blockquote>
               <div className="flex items-center gap-4">
-                <div className="h-10 w-10 bg-gray-200 rounded-full" /> {/* Avatar Placeholder */}
+                <img 
+                  src={review.image}
+                  alt={review.author}
+                  className="h-10 w-10 rounded-full object-cover"
+                />
                 <div>
                   <div className="font-semibold text-sm">{review.author}</div>
                   <div className="text-xs text-gray-500">{review.role}</div>

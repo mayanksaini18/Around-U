@@ -1,7 +1,7 @@
 // components/sections/Stats.tsx
 export default function Stats() {
   return (
-    <section className="py-24 bg-white border-y">
+    <section id="stats" className="py-24 bg-white border-y">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="font-semibold text-sm uppercase tracking-wider text-gray-500">By the numbers</span>
@@ -11,8 +11,12 @@ export default function Stats() {
 
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-16 items-center">
           {/* Image Side */}
-          <div className="bg-gray-100 rounded-2xl aspect-square flex items-center justify-center">
-             <span className="text-gray-400 font-medium">Map/Growth Visual</span>
+          <div className="bg-gray-100 rounded-2xl aspect-square overflow-hidden">
+             <img 
+               src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=600" 
+               alt="Map Visual" 
+               className="w-full h-full object-cover"
+             />
           </div>
 
           {/* Stats Side */}

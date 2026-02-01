@@ -15,8 +15,12 @@ export default function CTA() {
         </div>
         
         {/* Large visual placeholder */}
-        <div className="mx-auto max-w-4xl bg-gray-100 rounded-xl aspect-[16/9] flex items-center justify-center">
-             <span className="text-gray-400">App Interface / Happy User Image</span>
+        <div className="mx-auto max-w-4xl bg-gray-100 rounded-xl aspect-[16/9] overflow-hidden">
+             <img 
+               src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80&w=1200" 
+               alt="App Interface" 
+               className="w-full h-full object-cover"
+             />
         </div>
       </div>
     </section>

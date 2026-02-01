@@ -7,24 +7,27 @@ const steps = [
     step: "Search",
     title: "Browse available providers near you",
     desc: "See their skills, rates, and what others say.",
+    image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=800",
   },
   {
     icon: <Phone className="h-6 w-6 text-blue-600" />,
     step: "Connect",
     title: "Call or message to agree on the work",
     desc: "Talk directly. No middleman. No surprises.",
+    image: "https://images.unsplash.com/photo-1516387938699-a93567ec168e?auto=format&fit=crop&q=80&w=800",
   },
   {
     icon: <CheckCircle className="h-6 w-6 text-blue-600" />,
     step: "Done",
     title: "Work gets done. You pay what you agreed.",
     desc: "Leave a review so others know who to trust.",
+    image: "https://images.unsplash.com/photo-1581578731117-104f2a863a30?auto=format&fit=crop&q=80&w=800",
   },
 ];
 
 export default function HowItWorks() {
   return (
-    <section className="py-24 bg-white">
+    <section id="how-it-works" className="py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 max-w-2xl mx-auto">
           <span className="font-semibold text-blue-600">Simple</span>
@@ -43,7 +46,13 @@ export default function HowItWorks() {
               <p className="text-gray-600 mb-6 flex-grow">{item.desc}</p>
               
               {/* Image Placeholder matching wireframe */}
-              <div className="bg-gray-100 rounded-lg aspect-[4/3] w-full mt-auto"></div>
+              <div className="bg-gray-100 rounded-lg aspect-[4/3] w-full mt-auto overflow-hidden">
+                <img 
+                  src={item.image}
+                  alt={item.step}
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
           ))}
         </div>

@@ -19,8 +19,12 @@ export default function Hero() {
         </div>
         
         {/* Placeholder for Hero Image */}
-        <div className="mx-auto aspect-video w-full max-w-5xl rounded-xl bg-gray-100 object-cover border border-gray-200 shadow-sm flex items-center justify-center">
-             <span className="text-gray-400">Hero Image Placeholder</span>
+        <div className="mx-auto aspect-video w-full max-w-5xl rounded-xl bg-gray-100 overflow-hidden border border-gray-200 shadow-sm">
+             <img 
+               src="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=1200" 
+               alt="Hero Image" 
+               className="w-full h-full object-cover"
+             />
         </div>
       </div>
     </section>

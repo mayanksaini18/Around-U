@@ -8,7 +8,7 @@ import {
 
 export default function FAQ() {
   return (
-    <section className="py-24 container mx-auto px-4 max-w-3xl">
+    <section id="faq" className="py-24 container mx-auto px-4 max-w-3xl">
       <h2 className="text-3xl font-bold mb-2">FAQ</h2>
       <p className="text-gray-600 mb-10">Questions about how Around-U works and what to expect.</p>
       
