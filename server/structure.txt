@@ -1,0 +1,13 @@
+/backend
+  ├── src
+  │   ├── config
+  │   │   └── db.ts          # Database connection
+  │   ├── models             # Mongoose Schemas (The Blueprints)
+  │   │   ├── User.ts
+  │   │   ├── Provider.ts
+  │   │   └── Review.ts
+  │   ├── controllers        # The Logic (Search, Auth, etc.)
+  │   ├── routes             # API Endpoints
+  │   └── index.ts           # Entry point
+  ├── .env                   # Secrets (MONGO_URI)
+  └── package.json
