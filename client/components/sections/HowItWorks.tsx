@@ -1,6 +1,36 @@
 // components/sections/HowItWorks.tsx
 import { Search, Phone, CheckCircle, ArrowRight } from "lucide-react";
 
+// const steps = [
+//   {
+//     id: "01",
+//     icon: <Search className="h-6 w-6 text-white" />,
+//     step: "Discovery",
+//     title: "Find help in minutes, not days.",
+//     desc: "Browse verified providers in your immediate neighborhood. Filter by skill, price, and real reviews.",
+//     // Image: Person holding phone with a map/city background (Urban discovery vibe)
+//     image: "https://images.unsplash.com/photo-1569383746724-6f1b88de1aea?auto=format&fit=crop&q=80&w=800",
+//   },
+//   {
+//     id: "02",
+//     icon: <Phone className="h-6 w-6 text-white" />,
+//     step: "Negotiation",
+//     title: "Talk directly. No middleman.",
+//     desc: "Call or chat instantly. Agree on a fair price before the work starts. No hidden platform fees.",
+//     // Image: Two people talking/negotiating (Human connection vibe)
+//     image: "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?auto=format&fit=crop&q=80&w=800",
+//   },
+//   {
+//     id: "03",
+//     icon: <CheckCircle className="h-6 w-6 text-white" />,
+//     step: "Completion",
+//     title: "Work done. Trust built.",
+//     desc: "Pay exactly what you agreed. Leave a review to help your neighbors find the best people.",
+//     // Image: A worker/handyman fixing something (Action vibe)
+//     image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80&w=800",
+//   },
+// ];
+
 const steps = [
   {
     id: "01",
@@ -8,7 +38,8 @@ const steps = [
     step: "Discovery",
     title: "Find help in minutes, not days.",
     desc: "Browse verified providers in your immediate neighborhood. Filter by skill, price, and real reviews.",
-     image: "https://images.unsplash.com/photo-1516387938699-a93567ec168e?auto=format&fit=crop&q=80&w=800",
+    // REPLACED IMAGE: Person looking at a phone in a city setting
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE3fnLcHLdD0Q3nrP2aGJv08I73aB4Og1v5g&s",
   },
   {
     id: "02",
@@ -16,7 +47,7 @@ const steps = [
     step: "Negotiation",
     title: "Talk directly. No middleman.",
     desc: "Call or chat instantly. Agree on a fair price before the work starts. No hidden platform fees.",
-    image: "https://images.unsplash.com/photo-1516387938699-a93567ec168e?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?auto=format&fit=crop&q=80&w=800",
   },
   {
     id: "03",
@@ -24,10 +55,9 @@ const steps = [
     step: "Completion",
     title: "Work done. Trust built.",
     desc: "Pay exactly what you agreed. Leave a review to help your neighbors find the best people.",
-    image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=800", // Replaced with a more "home/service" vibe
+    image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80&w=800",
   },
 ];
-
 export default function HowItWorks() {
   return (
     <section id="how-it-works" className="py-24 bg-white relative">
