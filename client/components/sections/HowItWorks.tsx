@@ -8,7 +8,7 @@ const steps = [
     step: "Discovery",
     title: "Find help in minutes, not days.",
     desc: "Browse verified providers in your immediate neighborhood. Filter by skill, price, and real reviews.",
-    image: "https://images.unsplash.com/photo-1581578731117-104f2a863a30?auto=format&fit=crop&q=80&w=800",
+     image: "https://images.unsplash.com/photo-1516387938699-a93567ec168e?auto=format&fit=crop&q=80&w=800",
   },
   {
     id: "02",
@@ -40,7 +40,7 @@ export default function HowItWorks() {
           </div>
           <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-black mb-6 leading-[0.9]">
             FROM CHAOS <br />
-            TO <span className="text-gray-400">DONE.</span>
+            TO <span className="text-green-500">DONE</span>.
           </h2>
           <p className="text-xl text-gray-600 max-w-xl">
             Three simple steps to bridge the gap between "I need help" and "Problem solved."
@@ -87,7 +87,7 @@ export default function HowItWorks() {
                    <img 
                     src={item.image}
                     alt={item.step}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                    className="w-full h-full object-cover group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
                   />
                   {/* Subtle overlay */}
                   <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
