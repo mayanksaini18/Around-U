@@ -16,12 +16,12 @@ export default function Hero() {
         {/* Main Heading - The "Sayzo" Style */}
         <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-black mb-6 leading-[0.9]">
           ANY TASK. <br />
-          <span className="text-gray-400">ANY MOMENT.</span>
+          <span className="text-green-500">ANY MOMENT.</span>
         </h1>
 
         <p className="mx-auto max-w-xl text-lg md:text-xl text-gray-600 mb-10 font-medium leading-relaxed">
           The hyperlocal infrastructure for your neighborhood. <br className="hidden md:block"/>
-          Connect with verified doers in <span className="text-black font-bold underline decoration-wavy decoration-yellow-400">5 minutes</span>.
+          Connect with verified doers in <span className="text-black font-bold underline decoration-wavy decoration-green-400">minutes</span>.
         </p>
 
         {/* Action Buttons */}
