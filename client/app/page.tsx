@@ -13,12 +13,12 @@ export default function LandingPage() {
     <main className="min-h-screen bg-white">
       <Navbar />
       <Hero />
-      <Features />
-      <Stats />
+      {/* <Features /> */}
+      {/* <Stats /> */}
       <HowItWorks />
       <Testimonials />
       <FAQ />
-      <CTA />
+      {/* <CTA /> */}
       <Footer />
     </main>
   );

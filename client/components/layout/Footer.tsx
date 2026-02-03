@@ -1,70 +1,105 @@
 // components/layout/Footer.tsx
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Twitter, Heart, Apple, Smartphone } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-white border-t pt-16 pb-8">
-      <div className="container mx-auto px-4">
+    <footer className="bg-white pt-12 pb-6 px-4 relative">
+      {/* Main Dark Container 
+         Added 'relative' here so the absolutely positioned text inside knows where its boundaries are.
+      */}
+      <div className="relative mx-auto max-w-7xl bg-black text-white rounded-[2.5rem] overflow-hidden px-8 py-16 md:px-16 md:py-20">
         
-        {/* Newsletter Section */}
-        <div className="grid lg:grid-cols-2 gap-12 mb-16 items-center">
-          <div>
-            <h3 className="text-2xl font-bold mb-2">Stay in the loop</h3>
-            <p className="text-gray-600">Get updates on new providers, features, and when we launch in your area.</p>
+        {/* Top Grid: Logo + 4 Columns of Links */}
+        <div className="grid gap-12 lg:grid-cols-5 mb-20 relative z-10">
+          
+          {/* Brand / Logo Column */}
+          <div className="lg:col-span-1">
+            <Link href="/" className="text-3xl font-bold tracking-tighter text-white">
+              Around-U
+            </Link>
           </div>
-          <div className="flex gap-2 max-w-md w-full">
-            <Input type="email" placeholder="Enter your email" />
-            <Button className="bg-blue-600">Sign up</Button>
+
+          {/* Links Grid */}
+          <div className="lg:col-span-4 grid grid-cols-2 md:grid-cols-4 gap-8">
+            {/* Column 1 */}
+            <div className="flex flex-col gap-4">
+              <h4 className="text-lg font-semibold text-gray-200">Trust & Legal</h4>
+              <Link href="#" className="text-sm text-gray-400 hover:text-white transition-colors">Terms & Conditions</Link>
+              <Link href="#" className="text-sm text-gray-400 hover:text-white transition-colors">Privacy Policy</Link>
+              <Link href="#" className="text-sm text-gray-400 hover:text-white transition-colors">Safety Guidelines</Link>
+            </div>
+            {/* Column 2 */}
+            <div className="flex flex-col gap-4">
+              <h4 className="text-lg font-semibold text-gray-200">Company</h4>
+              <Link href="#" className="text-sm text-gray-400 hover:text-white transition-colors">About Us</Link>
+              <Link href="#" className="text-sm text-gray-400 hover:text-white transition-colors">Careers</Link>
+              <Link href="#" className="text-sm text-gray-400 hover:text-white transition-colors">Contact</Link>
+            </div>
+            {/* Column 3 */}
+            <div className="flex flex-col gap-4">
+              <h4 className="text-lg font-semibold text-gray-200">Support</h4>
+              <Link href="#" className="text-sm text-gray-400 hover:text-white transition-colors">FAQs</Link>
+              <Link href="#" className="text-sm text-gray-400 hover:text-white transition-colors">How it Works</Link>
+            </div>
+            {/* Column 4 */}
+            <div className="flex flex-col gap-4">
+              <h4 className="text-lg font-semibold text-gray-200">Join In</h4>
+              <Link href="#" className="text-sm text-gray-400 hover:text-white transition-colors">Waitlist</Link>
+              <Link href="#" className="text-sm text-gray-400 hover:text-white transition-colors">Partners</Link>
+            </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12 border-t pt-12">
-           {/* Column 1 */}
-           <div>
-              <div className="font-bold text-xl text-blue-600 mb-4">Around-U</div>
-              <p className="text-sm text-gray-500">
-                Get the latest updates on new providers and features.
-              </p>
-           </div>
-           
-           {/* Column 2 */}
-           <div className="flex flex-col gap-3">
-              <h4 className="font-semibold">Product</h4>
-              <Link href="#" className="text-sm text-gray-600 hover:text-black">Service Providers</Link>
-              <Link href="#" className="text-sm text-gray-600 hover:text-black">How it works</Link>
-              <Link href="#" className="text-sm text-gray-600 hover:text-black">Blog</Link>
-              <Link href="#" className="text-sm text-gray-600 hover:text-black">Contact</Link>
-           </div>
+        {/* Divider Line */}
+        <div className="h-px bg-gray-800 w-full mb-12 relative z-10" />
 
-           {/* Column 3 */}
-           <div className="flex flex-col gap-3">
-              <h4 className="font-semibold">About us</h4>
-              <Link href="#" className="text-sm text-gray-600 hover:text-black">Careers</Link>
-              <Link href="#" className="text-sm text-gray-600 hover:text-black">Press</Link>
-              <Link href="#" className="text-sm text-gray-600 hover:text-black">Partners</Link>
-           </div>
-
-           {/* Column 4 */}
-           <div className="flex flex-col gap-3">
-              <h4 className="font-semibold">Follow us</h4>
-              <div className="flex gap-4">
-                <Instagram className="h-5 w-5 text-gray-600" />
-                <Facebook className="h-5 w-5 text-gray-600" />
-                <Youtube className="h-5 w-5 text-gray-600" />
+        {/* Bottom Section */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-10 relative z-10 pb-10">
+          
+          {/* Left Side */}
+          <div className="flex flex-col gap-6">
+            <div className="flex items-center gap-2 text-gray-200 font-medium">
+              <span>Follow us</span>
+              <div className="flex gap-4 ml-4">
+                <Link href="#" className="hover:scale-110 transition-transform"><Facebook className="h-5 w-5" /></Link>
+                <Link href="#" className="hover:scale-110 transition-transform"><Twitter className="h-5 w-5" /></Link>
+                <Link href="#" className="hover:scale-110 transition-transform"><Instagram className="h-5 w-5" /></Link>
               </div>
-           </div>
-        </div>
+            </div>
+            
+            <div className="flex items-center gap-2 text-sm text-gray-500">
+              <span>Made with</span>
+              <Heart className="h-4 w-4 fill-green-500 text-green-500" /> 
+              <span>for your neighborhood</span>
+            </div>
+          </div>
 
-        <div className="border-t pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
-          <p>© 2026 Around-U. All rights reserved.</p>
-          <div className="flex gap-6">
-            <Link href="#">Privacy Policy</Link>
-            <Link href="#">Terms of Service</Link>
+          {/* Right Side */}
+          <div className="flex flex-col items-start md:items-end gap-6">
+             <div className="flex gap-4">
+                <div className="flex items-center gap-2 text-sm font-medium text-gray-400 mr-2">Mobile App</div>
+                <Apple className="h-6 w-6 text-white cursor-pointer hover:opacity-80" />
+                <Smartphone className="h-6 w-6 text-white cursor-pointer hover:opacity-80" />
+             </div>
+             <div className="flex gap-6 text-xs text-gray-500">
+                <Link href="#" className="hover:text-white">Terms</Link>
+                <Link href="#" className="hover:text-white">Privacy</Link>
+             </div>
           </div>
         </div>
+
+        {/* THE HYPERLOCAL CLIPPED TEXT EFFECT 
+           - absolute bottom-0: sticks it to the bottom.
+           - text-[18vw]: Makes the font huge relative to viewport width.
+           - translate-y-[30%]: Pushes it down so the bottom gets cut off by the container's overflow-hidden.
+           - opacity-[0.07]: Makes it very subtle.
+           - z-0: Ensures it stays behind the links.
+        */}
+        <div className="absolute bottom-0 left-0 w-full pointer-events-none leading-none select-none font-black text-center text-white opacity-[0.07] z-0">
+           <span className="block text-[18vw] tracking-tighter translate-y-[30%]">HYPERLOCAL</span>
+        </div>
+
       </div>
     </footer>
   );

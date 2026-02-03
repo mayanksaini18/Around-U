@@ -6,7 +6,7 @@ export default function Hero() {
     <section className="py-24 lg:py-32">
       <div className="container mx-auto px-4 text-center">
         <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-6xl">
-          Find the help you need, <br />
+          Find the <span className="font-medium  italic text-blue-600">help</span> you need, <br />
           right where you are
         </h1>
         <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600">
@@ -19,13 +19,13 @@ export default function Hero() {
         </div>
         
         {/* Placeholder for Hero Image */}
-        <div className="mx-auto aspect-video w-full max-w-5xl rounded-xl bg-gray-100 overflow-hidden border border-gray-200 shadow-sm">
+        {/* <div className="mx-auto aspect-video w-full max-w-5xl rounded-xl bg-gray-100 overflow-hidden border border-gray-200 shadow-sm">
              <img 
                src="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80&w=1200" 
                alt="Hero Image" 
                className="w-full h-full object-cover"
              />
-        </div>
+        </div> */}
       </div>
     </section>
   );
