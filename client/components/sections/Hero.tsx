@@ -1,6 +1,7 @@
 // components/sections/Hero.tsx
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Star } from "lucide-react";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -26,12 +27,16 @@ export default function Hero() {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row justify-center gap-4 mb-16">
+          <Link href="/find-help">
           <Button className="h-14 px-8 rounded-full bg-black text-white text-lg font-semibold hover:scale-105 transition-transform">
             Find help now
           </Button>
+          </Link>
+          <Link href="/partner">
           <Button variant="outline" className="h-14 px-8 rounded-full border-2 border-gray-200 text-lg font-semibold hover:bg-gray-50">
             Become a partner
           </Button>
+          </Link>
         </div>
 
         {/* Social Proof Strip */}
