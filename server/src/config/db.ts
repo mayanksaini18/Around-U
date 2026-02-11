@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
-const MONGO_URI = "mongodb://localhost:27017/aroundu";
+
 
 const connectDB = async ()=>{
     try{
-        await mongoose.connect(MONGO_URI);
+        await mongoose.connect(process.env.MONGO_URL!)
         console.log("mongoDB connected !")
     }catch(error){
     console.error("DB connection failed", error);
