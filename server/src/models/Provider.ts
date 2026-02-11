@@ -1,64 +1,27 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, Document } from "mongoose";
 
-const providerSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  phone: { type: String, required: true, unique: true }, // Verified via OTP later
-  skills: { 
-    type: String, 
-    required : true,
-    enum: ['Plumber', 'Electrician', 'Carpenter', 'Cleaner', 'Painter', 'Tutor', 'Other'] 
-  }, 
+export interface IProvider extends Document {
+  name: string;
+  phone: string;
+  pincode: string;
+  location: string;
+  service: string;
+  city: string;
+}
 
-  price:{ type : String},
-  experience : {type : String},
-
-  // The "Hyperlocal" Secret Sauce: GeoJSON
-  location: {
-    type: {
-      type: String,
-      enum: ['Point'], 
-      required: true
-    },
-    coordinates: {
-      type: [Number], // [Longitude, Latitude] - Note the order!
-      required: true
-    }
+const ProviderSchema: Schema = new Schema(
+  {
+    name: { type: String, required: true },
+    phone: { type: String, required: true },
+    pincode: { type: String, required: true },
+    location: { type: String, required: true },
+    service: { type: String, required: true },
+    city: { type: String, required: true },
   },
-  
-  bio: String,
-  hourlyRate: Number, // Negotiable baseline
-  isVerified: { type: Boolean, default: false }, // After Aadhar check
-  rating: { type: Number, default: 0 },
-  reviewCount: { type: Number, default: 0 }
-}, { timestamps: true });
+  { timestamps: true }
+);
 
-// CRITICAL: Create a 2dsphere index for geospatial queries
-providerSchema.index({ location: "2dsphere" });
+// 🔥 performance index
+ProviderSchema.index({ pincode: 1, service: 1 });
 
-// export const Provider = mongoose.model("Provider", providerSchema);import mongoose, { Schema, Document } from "mongoose";
-
-// export interface IProvider extends Document {
-//   name: string;
-//   service: string;
-//   phone: string;
-//   pincode: string;
-//   rating: number;
-//   isActive: boolean;
-// }
-
-// const ProviderSchema = new Schema<IProvider>(
-//   {
-//     name: { type: String, required: true },
-//     service: { type: String, required: true, lowercase: true },
-//     phone: { type: String, required: true },
-//     pincode: { type: String, required: true },
-//     rating: { type: Number, default: 4 },
-//     isActive: { type: Boolean, default: true }
-//   },
-//   { timestamps: true }
-// );
-
-// export default mongoose.model<IProvider>(
-//   "Provider",
-//   ProviderSchema
-// );
+export default mongoose.model<IProvider>("Provider", ProviderSchema);
