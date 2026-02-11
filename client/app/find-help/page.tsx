@@ -25,7 +25,10 @@ export default function FindHelpPage() {
       setLoading(true);
       try {
         
-        const res = await fetch(`http://localhost:4999/api/search?service=${activeCategory.toLocaleLowerCase()}&pincode=${pincode}`);
+        const res = await fetch(
+  `${process.env.NEXT_PUBLIC_API_URL}/api/search?service=${activeCategory.toLowerCase()}&pincode=${pincode}`
+);
+
         const result = await res.json();
         if(res.ok){
          setProviders(result.data);
