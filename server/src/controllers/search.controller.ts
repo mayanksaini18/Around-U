@@ -23,6 +23,7 @@ export const searchProviders = async(
       data :providers
     });
     }catch(error){
+        console.error("Search Error:", error);
         res.status(500).json({error: "Server Error"})
     
     }
