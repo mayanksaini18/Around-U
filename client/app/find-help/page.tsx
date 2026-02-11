@@ -12,28 +12,35 @@ const CATEGORIES = ["All", "Plumber", "Electrician", "Carpenter", "Cleaner", "Pa
 
 export default function FindHelpPage() {
   const [activeCategory, setActiveCategory] = useState("All");
-  const [providers, setProviders] = useState([]);
+  const [pincode, setPincode] = useState("");
+  const [providers, setProviders] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
 
-  // Fetch providers when category changes
-  useEffect(() => {
-    const fetchProviders = async () => {
+  const handleSearch = async () => {
+
+  if (!activeCategory || !pincode) {
+    alert("Please enter service and pincode");
+    return;
+  }
       setLoading(true);
       try {
-        // Replace with your actual backend URL
-        // Example: ?category=Plumber&lat=12.9716&lng=77.5946
-        const res = await fetch(`http://localhost:5000/api/providers?category=${activeCategory}`);
-        const data = await res.json();
-        setProviders(data);
+        
+        const res = await fetch(`http://localhost:4999/api/search?service=${activeCategory.toLocaleLowerCase()}&pincode=${pincode}`);
+        const result = await res.json();
+        if(res.ok){
+         setProviders(result.data);
+        } else {
+          alert(result.message);
+          setProviders([]);
+        }
       } catch (error) {
         console.error("Failed to fetch providers", error);
+        setProviders([]);
       } finally {
         setLoading(false);
       }
     };
-
-    fetchProviders();
-  }, [activeCategory]);
+  
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -54,6 +61,8 @@ export default function FindHelpPage() {
              <div className="relative flex-grow">
                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
                <Input 
+                value={activeCategory}
+                onChange={(e) => setActiveCategory(e.target.value)}
                  placeholder="Search for 'Plumber' or 'AC Repair'..." 
                  className="h-14 pl-12 rounded-full text-lg border-gray-200 bg-gray-50 focus:bg-white transition-all"
                />
@@ -61,16 +70,20 @@ export default function FindHelpPage() {
              <div className="relative md:w-1/3">
                <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
                <Input 
+                value={pincode}
+                onChange={(e) => setPincode(e.target.value)}
                  placeholder="pincode" 
                  className="h-14 pl-12 rounded-full text-lg border-gray-200 bg-gray-50 focus:bg-white transition-all"
                />
              </div>
-             <Button className="h-14 px-8 rounded-full bg-black text-white hover:bg-gray-800 text-lg font-bold">
+             <Button 
+                onClick={handleSearch}
+                className="h-14 px-8 rounded-full bg-black text-white hover:bg-gray-800 text-lg font-bold">
                Search
              </Button>
           </div>
 
-          {/* Categories */}
+          {/* Categories
           <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
             {CATEGORIES.map((cat) => (
               <button
@@ -85,7 +98,7 @@ export default function FindHelpPage() {
                 {cat}
               </button>
             ))}
-          </div>
+          </div> */}
         </div>
       </section>
 
@@ -111,16 +124,12 @@ export default function FindHelpPage() {
                  <div className="flex flex-col items-center sm:items-start">
                     <div className="relative h-24 w-24 rounded-2xl overflow-hidden mb-3">
                        <img src={provider.image || "https://via.placeholder.com/150"} alt={provider.name} className="h-full w-full object-cover" />
-                       {provider.isVerified && (
-                         <div className="absolute bottom-0 left-0 w-full bg-green-500 text-white text-[10px] font-bold text-center py-0.5 uppercase tracking-wider">
-                           Verified
-                         </div>
-                       )}
+                       
                     </div>
                     <div className="flex items-center gap-1 bg-yellow-50 px-3 py-1 rounded-full border border-yellow-100">
                        <Star className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400" />
-                       <span className="text-sm font-bold">{provider.rating}</span>
-                       <span className="text-xs text-gray-500">({provider.reviewCount})</span>
+                       {/* <span className="text-sm font-bold">{provider.rating}</span> */}
+                       {/* <span className="text-xs text-gray-500">({provider.reviewCount})</span> */}
                     </div>
                  </div>
 
@@ -129,13 +138,13 @@ export default function FindHelpPage() {
                     <div>
                        <div className="flex justify-between items-start">
                           <div>
-                            <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">{provider.skill}</span>
+                            <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">{provider.service}</span>
                             <h3 className="text-xl font-bold text-gray-900 leading-tight">{provider.name}</h3>
                           </div>
                           <div className="text-right">
                             <div className="text-lg font-bold text-black">{provider.price}</div>
                             <div className="text-xs text-gray-500 flex items-center justify-end gap-1">
-                               {/* <MapPin className="h-3 w-3" /> {provider.distance} */}
+                               <MapPin className="h-3 w-3" /> {provider.location} ,{provider.city}
                             </div>
                           </div>
                        </div>
@@ -152,9 +161,12 @@ export default function FindHelpPage() {
 
                     {/* Actions */}
                     <div className="flex gap-3 mt-6">
-                       <Button className="flex-1 rounded-xl bg-black hover:bg-gray-800">
-                          <Phone className="h-4 w-4 mr-2" /> Call Now
-                       </Button>
+                       <a href={`tel:${provider.phone}`} className="flex-1">
+  <Button className="w-full rounded-xl bg-black">
+    <Phone className="h-4 w-4 mr-2" /> Call Now
+  </Button>
+</a>
+
                        <Button variant="outline" className="rounded-xl border-gray-200">
                           <ArrowUpRight className="h-4 w-4" /> Profile
                        </Button>
@@ -162,6 +174,7 @@ export default function FindHelpPage() {
                  </div>
               </div>
             ))}
+
          </div>
          )}
       </section>
