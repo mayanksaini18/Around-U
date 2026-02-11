@@ -9,16 +9,17 @@ router.post("/register" ,async (req:Request, res:Response)=>{
     const {name , phone , service , pincode , location , city } = req.body;
     
     if(!name || !phone || !service || !pincode || !location || !city){
-        return res.status(400).json({
+        res.status(400).json({
             message: "All fields are required"
-        })
+        });
+        return;
     }
 
     try{
         const providers = await Provider.create({
             name,
             phone,
-            service,
+            service: String(service).toLowerCase(),
             pincode,
             location,
             city
@@ -28,10 +29,10 @@ router.post("/register" ,async (req:Request, res:Response)=>{
             data: providers
         })
         } catch(error){
-        res.status(500).json({error: "Server Error"})
+            console.error("Registration Error:", error);
+            res.status(500).json({error: "Server Error"})
         }
     }
 )
 
 export default router;
-
