@@ -30,7 +30,7 @@ export default function PartnerPage() {
     setStatus({ type: null, message: "" });
 
     try {
-      const response = await fetch("http://localhost:4999/api/v1/worker/register", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/worker/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -53,7 +53,7 @@ export default function PartnerPage() {
         pincode: "",
         location: "",
         city: ""
-});
+   });
 
       } else {
         setStatus({ type: "error", message: "Something went wrong. else block line 59" });
