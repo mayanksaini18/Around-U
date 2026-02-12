@@ -30,29 +30,36 @@ export default function PartnerPage() {
     setStatus({ type: null, message: "" });
 
     try {
-      const response = await fetch("http://localhost:8000/api/v1/worker/register", {
+      const response = await fetch("http://localhost:4999/api/v1/worker/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name : formData.fullName,
+          phone : formData.phoneNumber,
+          service : formData.service,
+          pincode : formData.pincode,
+          location : formData.location,
+          city : formData.city
+        }),
       });
 
       if (response.ok) {
         setStatus({ type: "success", message: "Application submitted! We'll contact you soon." });
       //   setFormData({ fullName: "", phoneNumber: "", service: "", city: "" });
       setFormData({
-  fullName: "",
-  phoneNumber: "",
-  service: "",
-  pincode: "",
-  location: "",
-  city: ""
+        fullName: "",
+        phoneNumber: "",
+        service: "",
+        pincode: "",
+        location: "",
+        city: ""
 });
 
       } else {
-        setStatus({ type: "error", message: "Something went wrong. Please try again." });
+        setStatus({ type: "error", message: "Something went wrong. else block line 59" });
       }
-    } catch (error) {
-      setStatus({ type: "error", message: "Failed to connect. Please check your internet." });
+    } catch (error : any) {
+      setStatus({ type: "error", message: error.message });
     } finally {
       setLoading(false);
     }
