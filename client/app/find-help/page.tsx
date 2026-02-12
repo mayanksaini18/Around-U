@@ -11,10 +11,13 @@ import Link from "next/link";
 const CATEGORIES = ["All", "Plumber", "Electrician", "Carpenter", "Cleaner", "Painter", "Tutor"];
 
 export default function FindHelpPage() {
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [activeCategory, setActiveCategory] = useState("");
   const [pincode, setPincode] = useState("");
   const [providers, setProviders] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
+
+  const [hasSearched, setHasSearched] = useState(false);
+
 
   const handleSearch = async () => {
 
@@ -23,6 +26,7 @@ export default function FindHelpPage() {
     return;
   }
       setLoading(true);
+        setHasSearched(true);
       try {
         
         const res = await fetch(
@@ -107,14 +111,21 @@ export default function FindHelpPage() {
 
       {/* Results Grid */}
       <section className="py-12 px-4 container mx-auto max-w-5xl">
-         <div className="flex justify-between items-center mb-8">
-            <h2 className="text-xl font-bold text-gray-800">
-              {providers.length} Providers near <span className="underline decoration-wavy decoration-yellow-400">Indiranagar</span>
-            </h2>
-            <Button variant="outline" size="sm" className="gap-2 rounded-full">
-               <Filter className="h-4 w-4" /> Filters
-            </Button>
-         </div>
+         {hasSearched && !loading && (
+  <div className="flex justify-between items-center mb-8">
+    <h2 className="text-xl font-bold text-gray-800">
+      {providers.length} {providers.length === 1 ? "Provider" : "Providers"} near{" "}
+      <span className="underline decoration-wavy decoration-yellow-400">
+        {pincode}
+      </span>
+    </h2>
+
+    <Button variant="outline" size="sm" className="gap-2 rounded-full">
+      <Filter className="h-4 w-4" /> Filters
+    </Button>
+  </div>
+)}
+
 
          {loading ? (
            <div className="text-center py-20">Loading providers...</div>
