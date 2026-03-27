@@ -114,10 +114,13 @@ export default function DiscoveryScreen() {
           <View style={styles.resultCard}>
             <View style={{ flex: 1 }}>
               <Text style={styles.resName}>{item.name}</Text>
-              <Text style={styles.resService}>{item.phone}</Text>
+              <View style={styles.ratingRow}>
+                <Ionicons name="star" size={14} color="#FFD700" />
+                <Text style={styles.resRating}>{item.rating?.toFixed(1) || "0.0"} ({item.reviewCount || 0})</Text>
+              </View>
               <Text style={styles.resService}>{item.service} • {item.location}</Text>
-              <Text style={styles.resService}>{item.city}</Text>
-              <Text style={styles.resService}>{item.pincode}</Text>
+              {item.bio ? <Text style={styles.resBio} numberOfLines={2}>"{item.bio}"</Text> : null}
+              <Text style={styles.resLocation}>{item.city} • {item.pincode}</Text>
 
             </View>
             <TouchableOpacity
@@ -157,7 +160,11 @@ const styles = StyleSheet.create({
   tileText: { color: '#FFF', fontSize: 20, fontWeight: '800' },
   resultCard: { backgroundColor: '#1A1A1A', borderRadius: 20, padding: 20, marginBottom: 12, flexDirection: 'row', alignItems: 'center' },
   resName: { color: '#FFF', fontSize: 18, fontWeight: '700' },
-  resService: { color: '#888', fontSize: 14, marginTop: 4 },
+  resService: { color: '#888', fontSize: 14, marginTop: 4, textTransform: 'capitalize' },
+  ratingRow: { flexDirection: 'row', alignItems: 'center', marginTop: 4 },
+  resRating: { color: '#FFD700', fontSize: 14, fontWeight: '600', marginLeft: 4 },
+  resBio: { color: '#AAA', fontSize: 13, marginTop: 6, fontStyle: 'italic' },
+  resLocation: { color: '#666', fontSize: 12, marginTop: 4 },
   callButton: { backgroundColor: '#FFF', padding: 12, borderRadius: 12 },
   emptyContainer: { paddingVertical: 20, alignItems: 'center' },
   emptyText: { color: '#444', fontWeight: '600' }
