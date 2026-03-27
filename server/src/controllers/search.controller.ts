@@ -16,7 +16,7 @@ export const searchProviders = async(
         const providers = await Provider.find({
       service: String(service).toLowerCase(),
       pincode,
-    });
+    }).sort({ rating: -1 });
     res.json({
       message: "success",
       count: providers.length,
