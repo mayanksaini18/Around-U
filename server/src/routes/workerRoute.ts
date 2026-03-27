@@ -6,7 +6,7 @@ import Provider from "../models/Provider.js";
 const router = Router();
 
 router.post("/register" ,async (req:Request, res:Response)=>{
-    const {name , phone , service , pincode , location , city } = req.body;
+    const {name , phone , service , pincode , location , city, bio } = req.body;
     
     if(!name || !phone || !service || !pincode || !location || !city){
         res.status(400).json({
@@ -22,7 +22,8 @@ router.post("/register" ,async (req:Request, res:Response)=>{
             service: String(service).toLowerCase(),
             pincode,
             location,
-            city
+            city,
+            bio: bio || ""
         })
         res.json({
             message: "success",

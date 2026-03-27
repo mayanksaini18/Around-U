@@ -7,6 +7,9 @@ export interface IProvider extends Document {
   location: string;
   service: string;
   city: string;
+  bio?: string;
+  rating: number;
+  reviewCount: number;
 }
 
 const ProviderSchema: Schema = new Schema(
@@ -17,11 +20,15 @@ const ProviderSchema: Schema = new Schema(
     location: { type: String, required: true },
     service: { type: String, required: true },
     city: { type: String, required: true },
+    bio: { type: String, default: "" },
+    rating: { type: Number, default: 0 },
+    reviewCount: { type: Number, default: 0 },
   },
   { timestamps: true }
 );
 
 // 🔥 performance index
 ProviderSchema.index({ pincode: 1, service: 1 });
+ProviderSchema.index({ rating: -1 }); // Index for sorting by top rated
 
 export default mongoose.model<IProvider>("Provider", ProviderSchema);

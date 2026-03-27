@@ -142,8 +142,8 @@ export default function FindHelpPage() {
                     </div>
                     <div className="flex items-center gap-1 bg-yellow-50 px-3 py-1 rounded-full border border-yellow-100">
                        <Star className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400" />
-                       {/* <span className="text-sm font-bold">{provider.rating}</span> */}
-                       {/* <span className="text-xs text-gray-500">({provider.reviewCount})</span> */}
+                       <span className="text-sm font-bold">{provider.rating?.toFixed(1) || "0.0"}</span>
+                       <span className="text-xs text-gray-500">({provider.reviewCount || 0})</span>
                     </div>
                  </div>
 
@@ -156,12 +156,18 @@ export default function FindHelpPage() {
                             <h3 className="text-xl font-bold text-gray-900 leading-tight">{provider.name}</h3>
                           </div>
                           <div className="text-right">
-                            <div className="text-lg font-bold text-black">{provider.price}</div>
+                            <div className="text-lg font-bold text-black">{provider.price || "Contact for Price"}</div>
                             <div className="text-xs text-gray-500 flex items-center justify-end gap-1">
                                <MapPin className="h-3 w-3" /> {provider.location} ,{provider.city}
                             </div>
                           </div>
                        </div>
+                       
+                       {provider.bio && (
+                         <p className="text-sm text-gray-600 mt-2 line-clamp-2 italic">
+                           "{provider.bio}"
+                         </p>
+                       )}
                        
                        {/* Badges */}
                        <div className="flex flex-wrap gap-2 mt-3">
