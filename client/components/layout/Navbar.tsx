@@ -14,17 +14,20 @@ export default function Navbar() {
 
         {/* Center Links (Desktop) */}
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-700">
-          <Link href="#" className="hover:text-black transition-colors">How it works</Link>
-          <Link href="#" className="hover:text-black transition-colors">Safety</Link>
-          <Link href="#" className="hover:text-black transition-colors">For Workers</Link>
+          <Link href="/how-it-works" className="hover:text-black transition-colors">How it works</Link>
+          <Link href="/safety" className="hover:text-black transition-colors">Safety</Link>
+          <Link href="/for-workers" className="hover:text-black transition-colors">For Workers</Link>
         </div>
 
         {/* CTA */}
         <div className="flex items-center gap-4">
            <Link href="#" className="text-sm font-medium text-gray-700 hover:text-black hidden sm:block">Login</Link>
-           <Button className="rounded-full bg-black text-white hover:bg-gray-800 px-6">
+          <Link href="https://expo.dev/accounts/mayank0416/projects/app/builds/d2035ed5-a617-4190-a6e3-d0b5c78eafca" >
+          <Button className="rounded-full bg-black text-white hover:bg-gray-800 px-6">
              Get the app
            </Button>
+          </Link>
+           
         </div>
       </nav>
     </div>
