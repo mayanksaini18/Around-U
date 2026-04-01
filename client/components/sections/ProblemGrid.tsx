@@ -34,7 +34,7 @@ export default function ProblemGrid() {
                   <Check className="h-5 w-5" /> <span>Around-U Solution</span>
                 </div>
                 <p className="text-sm mt-2 text-gray-600">
-                  Broadcast your task. Only available workers respond in minutes.
+                  Search your pincode. See who&apos;s available in your neighbourhood in seconds.
                 </p>
               </div>
             </div>
