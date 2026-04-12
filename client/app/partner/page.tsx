@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CheckCircle2, DollarSign, Clock, ShieldCheck } from "lucide-react";
+import { apiUrl } from "@/lib/api";
 
 export default function PartnerPage() {
   const [formData, setFormData] = useState({
@@ -19,47 +20,68 @@ export default function PartnerPage() {
   });
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<{ type: "success" | "error" | null; message: string }>({ type: null, message: "" });
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const scrollToForm = () => {
+    formRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    const next =
+      name === "phoneNumber"
+        ? value.replace(/[^\d+]/g, "").slice(0, 13)
+        : name === "pincode"
+        ? value.replace(/\D/g, "").slice(0, 6)
+        : value;
+    setFormData({ ...formData, [name]: next });
+  };
+
+  const validate = (): string | null => {
+    if (!/^(\+?91)?[6-9]\d{9}$/.test(formData.phoneNumber)) return "Enter a valid Indian phone number";
+    if (!/^\d{6}$/.test(formData.pincode)) return "Pincode must be 6 digits";
+    if (formData.fullName.trim().length < 2) return "Full name is required";
+    if (!formData.service.trim()) return "Service category is required";
+    if (!formData.location.trim()) return "Location is required";
+    if (!formData.city.trim()) return "City is required";
+    return null;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const err = validate();
+    if (err) {
+      setStatus({ type: "error", message: err });
+      return;
+    }
+
     setLoading(true);
     setStatus({ type: null, message: "" });
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/worker/register`, {
+      const response = await fetch(apiUrl("/api/worker/register"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name : formData.fullName,
-          phone : formData.phoneNumber,
-          service : formData.service,
-          pincode : formData.pincode,
-          location : formData.location,
-          city : formData.city
+          name: formData.fullName,
+          phone: formData.phoneNumber,
+          service: formData.service,
+          pincode: formData.pincode,
+          location: formData.location,
+          city: formData.city,
         }),
       });
 
+      const result = await response.json().catch(() => ({}));
+
       if (response.ok) {
         setStatus({ type: "success", message: "Application submitted! We'll contact you soon." });
-      //   setFormData({ fullName: "", phoneNumber: "", service: "", city: "" });
-      setFormData({
-        fullName: "",
-        phoneNumber: "",
-        service: "",
-        pincode: "",
-        location: "",
-        city: ""
-   });
-
+        setFormData({ fullName: "", phoneNumber: "", service: "", pincode: "", location: "", city: "" });
       } else {
-        setStatus({ type: "error", message: "Something went wrong. else block line 59" });
+        setStatus({ type: "error", message: result.message || `Registration failed (${response.status})` });
       }
-    } catch (error : any) {
-      setStatus({ type: "error", message: error.message });
+    } catch (error: any) {
+      setStatus({ type: "error", message: error.message || "Network error" });
     } finally {
       setLoading(false);
     }
@@ -88,7 +110,7 @@ export default function PartnerPage() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-               <Button className="h-14 px-10 rounded-full bg-black text-white hover:bg-gray-800 text-lg font-bold">
+               <Button onClick={scrollToForm} className="h-14 px-10 rounded-full bg-black text-white hover:bg-gray-800 text-lg font-bold">
                   Join Now
                </Button>
                <Button variant="outline" className="h-14 px-10 rounded-full border-gray-300 text-black hover:bg-gray-50 text-lg">
@@ -159,7 +181,7 @@ export default function PartnerPage() {
                      ))}
                   </ul>
                </div>
-               <form onSubmit={handleSubmit} className="bg-white p-8 rounded-3xl border border-gray-200 shadow-sm">
+               <form ref={formRef} onSubmit={handleSubmit} className="bg-white p-8 rounded-3xl border border-gray-200 shadow-sm">
                   <div className="space-y-4">
                      {status.message && (
                         <div className={`p-3 rounded-xl text-sm font-medium ${status.type === "success" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}>
