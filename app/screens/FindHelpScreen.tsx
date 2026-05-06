@@ -19,7 +19,7 @@ const CATEGORIES = [
   { id: '9', name: 'GARDENER', size: 'small', icon: 'leaf-outline' },
 ];
 
-export default function DiscoveryScreen() {
+export default function DiscoveryScreen({ navigation }: any) {
   const insets = useSafeAreaInsets();
   const { width } = useWindowDimensions();
   const compact = width < 380;
@@ -200,12 +200,20 @@ export default function DiscoveryScreen() {
               {item.bio ? <Text style={styles.resBio} numberOfLines={2}>"{item.bio}"</Text> : null}
               <Text style={styles.resLocation}>{item.city} • {item.pincode}</Text>
             </View>
-            <TouchableOpacity
-              style={styles.callButton}
-              onPress={() => Linking.openURL(`tel:${item.phone}`)}
-            >
-              <Ionicons name="call" size={20} color={theme.colors.white} />
-            </TouchableOpacity>
+            <View style={styles.cardActions}>
+              <TouchableOpacity
+                style={styles.callButton}
+                onPress={() => Linking.openURL(`tel:${item.phone}`)}
+              >
+                <Ionicons name="call" size={20} color={theme.colors.white} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.profileButton}
+                onPress={() => navigation.navigate('ProviderDetail', { provider: item })}
+              >
+                <Ionicons name="arrow-forward" size={18} color={theme.colors.ink} />
+              </TouchableOpacity>
+            </View>
           </View>
         )}
         ListEmptyComponent={
@@ -404,10 +412,22 @@ const styles = StyleSheet.create({
     marginTop: 4,
     fontFamily: fonts.body,
   },
+  cardActions: {
+    flexDirection: 'column',
+    gap: 8,
+  },
   callButton: {
     backgroundColor: theme.colors.accent,
     padding: 14,
     borderRadius: 14,
+  },
+  profileButton: {
+    backgroundColor: theme.colors.surfaceMuted,
+    padding: 14,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    alignItems: 'center',
   },
   emptyContainer: {
     paddingVertical: 20,
