@@ -92,4 +92,22 @@ router.patch("/:id/availability", async (req: Request, res: Response) => {
   }
 });
 
+router.patch("/:id/verify", async (req: Request, res: Response) => {
+  const adminSecret = req.headers["x-admin-secret"];
+  if (!adminSecret || adminSecret !== process.env.ADMIN_SECRET) {
+    return res.status(403).json({ message: "Forbidden" });
+  }
+  try {
+    const provider = await Provider.findByIdAndUpdate(
+      req.params.id,
+      { verified: true },
+      { new: true, select: "name verified" }
+    );
+    if (!provider) return res.status(404).json({ message: "Provider not found" });
+    res.json({ message: "success", data: provider });
+  } catch {
+    res.status(400).json({ message: "Invalid provider ID" });
+  }
+});
+
 export default router;
