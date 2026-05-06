@@ -21,6 +21,7 @@ type SeedRow = {
   rating?: number;
   reviewCount?: number;
   price?: string;
+  bio?: string;
   badges?: string[];
   verified?: boolean;
 };
@@ -28,7 +29,9 @@ type SeedRow = {
 async function run() {
   await connectDB();
 
-  const raw = await readFile(path.join(__dirname, "partners.json"), "utf-8");
+  const fileArg = process.argv.find((a) => a.endsWith(".json"));
+  const jsonFile = fileArg ?? "partners.json";
+  const raw = await readFile(path.join(__dirname, jsonFile), "utf-8");
   const rows: SeedRow[] = JSON.parse(raw);
 
   const mode = process.argv.includes("--reset") ? "reset" : "upsert";
@@ -55,6 +58,7 @@ async function run() {
       available: true,
     };
     if (r.price) doc.price = r.price;
+    if (r.bio) doc.bio = r.bio;
     return {
       updateOne: {
         filter: { phone: r.phone, service: canonical },
