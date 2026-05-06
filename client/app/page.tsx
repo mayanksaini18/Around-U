@@ -17,7 +17,7 @@ export default function LandingPage() {
       <Hero />
       <ProblemGrid />
       <Features />
-      {/* <Stats /> */}
+      <Stats />
       <HowItWorks />
       <Testimonials />
       <FAQ />
