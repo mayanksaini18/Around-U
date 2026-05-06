@@ -24,6 +24,18 @@ const registerSchema = z.object({
   pincode: z.string().regex(/^\d{6}$/, "Pincode must be 6 digits"),
   location: z.string().min(2).max(120),
   city: z.string().min(2).max(60),
+  bio: z.string().max(300).optional(),
+  price: z.string().max(30).optional(),
+});
+
+router.get("/:id", async (req: Request, res: Response) => {
+  try {
+    const provider = await Provider.findById(req.params.id).lean();
+    if (!provider) return res.status(404).json({ message: "Provider not found" });
+    res.json({ message: "success", data: provider });
+  } catch {
+    res.status(400).json({ message: "Invalid provider ID" });
+  }
 });
 
 router.post(
@@ -48,6 +60,8 @@ router.post(
         pincode: data.pincode,
         location: data.location,
         city: data.city,
+        ...(data.bio && { bio: data.bio }),
+        ...(data.price && { price: data.price }),
       });
       res.status(201).json({ message: "success", data: provider });
     } catch (error: any) {
