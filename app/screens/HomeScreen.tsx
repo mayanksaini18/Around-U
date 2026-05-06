@@ -94,6 +94,7 @@ export default function HomeScreen({ navigation }: any) {
 
             <TouchableOpacity
               style={[styles.secondaryButton, { paddingVertical: compact ? 16 : 18 }]}
+              onPress={() => navigation.navigate("MainTabs", { screen: "Partner" })}
               activeOpacity={0.85}
             >
               <Text style={styles.secondaryButtonText}>BECOME A PARTNER</Text>
