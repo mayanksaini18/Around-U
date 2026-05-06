@@ -15,8 +15,9 @@ export default function PartnerPage() {
     service: "",
     pincode: "",
     location: "",
-    city: ""
-    
+    city: "",
+    bio: "",
+    price: "",
   });
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<{ type: "success" | "error" | null; message: string }>({ type: null, message: "" });
@@ -69,6 +70,8 @@ export default function PartnerPage() {
           pincode: formData.pincode,
           location: formData.location,
           city: formData.city,
+          ...(formData.bio && { bio: formData.bio }),
+          ...(formData.price && { price: formData.price }),
         }),
       });
 
@@ -76,7 +79,7 @@ export default function PartnerPage() {
 
       if (response.ok) {
         setStatus({ type: "success", message: "Application submitted! We'll contact you soon." });
-        setFormData({ fullName: "", phoneNumber: "", service: "", pincode: "", location: "", city: "" });
+        setFormData({ fullName: "", phoneNumber: "", service: "", pincode: "", location: "", city: "", bio: "", price: "" });
       } else {
         setStatus({ type: "error", message: result.message || `Registration failed (${response.status})` });
       }
@@ -250,11 +253,33 @@ export default function PartnerPage() {
   <Input
     name="service"
     value={formData.service}
-    onChange={handleChange} 
+    onChange={handleChange}
     required
     placeholder="electrician / plumber"
     className="bg-white border-gray-200 h-12 rounded-xl mt-1"
   />
+</div>
+<div>
+  <label className="text-sm font-bold text-gray-700 ml-1">Starting Price <span className="font-normal text-gray-400">(optional)</span></label>
+  <Input
+    name="price"
+    value={formData.price}
+    onChange={handleChange}
+    placeholder="e.g. ₹300/hr or ₹500 flat"
+    className="bg-white border-gray-200 h-12 rounded-xl mt-1"
+  />
+</div>
+<div>
+  <label className="text-sm font-bold text-gray-700 ml-1">Short Bio <span className="font-normal text-gray-400">(optional, max 300 chars)</span></label>
+  <textarea
+    name="bio"
+    value={formData.bio}
+    onChange={(e) => setFormData({ ...formData, bio: e.target.value.slice(0, 300) })}
+    placeholder="5 years experience fixing leaks and plumbing in BTM Layout..."
+    rows={3}
+    className="w-full mt-1 px-4 py-3 rounded-xl border border-gray-200 bg-white text-sm text-gray-800 resize-none focus:outline-none focus:ring-2 focus:ring-black"
+  />
+  <p className="text-xs text-gray-400 mt-1 text-right">{formData.bio.length}/300</p>
 </div>
                      <Button disabled={loading} type="submit" className="w-full h-14 bg-black text-white hover:bg-gray-800 rounded-xl text-lg font-bold mt-4 disabled:opacity-50">
                         {loading ? "Submitting..." : "Submit Application"}
