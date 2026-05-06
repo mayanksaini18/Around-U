@@ -8,6 +8,7 @@ export interface IProvider extends Document {
   service: string;
   serviceAliases: string[];
   city: string;
+  bio?: string;
   rating: number;
   reviewCount: number;
   price?: string;
@@ -27,6 +28,7 @@ const ProviderSchema: Schema = new Schema(
     service: { type: String, required: true, lowercase: true, trim: true, index: true },
     serviceAliases: { type: [String], default: [], index: true },
     city: { type: String, required: true, lowercase: true, trim: true },
+    bio: { type: String, maxlength: 300 },
     rating: { type: Number, default: 0, min: 0, max: 5 },
     reviewCount: { type: Number, default: 0, min: 0 },
     price: { type: String },
