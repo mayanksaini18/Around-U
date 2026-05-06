@@ -9,9 +9,14 @@ import { fonts, theme } from "../theme";
 
 const CATEGORIES = [
   { id: '1', name: 'ELECTRICIAN', size: 'large', icon: 'flash-outline' },
-  { id: '2', name: 'CLEANING', size: 'small', icon: 'water-outline' },
-  { id: '3', name: 'PLUMBING', size: 'small', icon: 'construct-outline' },
-  { id: '4', name: 'CAR WASH', size: 'large', icon: 'car-outline' },
+  { id: '2', name: 'PLUMBER', size: 'small', icon: 'construct-outline' },
+  { id: '3', name: 'CLEANER', size: 'small', icon: 'water-outline' },
+  { id: '4', name: 'CARPENTER', size: 'large', icon: 'hammer-outline' },
+  { id: '5', name: 'PAINTER', size: 'small', icon: 'color-palette-outline' },
+  { id: '6', name: 'TUTOR', size: 'small', icon: 'book-outline' },
+  { id: '7', name: 'AC REPAIR', size: 'large', icon: 'snow-outline' },
+  { id: '8', name: 'MECHANIC', size: 'small', icon: 'car-outline' },
+  { id: '9', name: 'GARDENER', size: 'small', icon: 'leaf-outline' },
 ];
 
 export default function DiscoveryScreen() {
