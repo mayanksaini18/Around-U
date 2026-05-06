@@ -32,23 +32,34 @@ export default function DiscoveryScreen() {
   const [pincode, setPincode] = useState("");
   const [results, setResults] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(false);
 
-  const handleSearch = async (manualService?: string) => {
+  const handleSearch = async (manualService?: string, pg = 1) => {
     const searchService = manualService || service;
     if (!searchService || !pincode) return;
 
     try {
-      setLoading(true);
-      setHasSearched(true);
-      const url = `https://around-u-ma5e.onrender.com/api/search/?service=${searchService}&pincode=${pincode}`;
+      pg === 1 ? setLoading(true) : setLoadingMore(true);
+      if (pg === 1) setHasSearched(true);
+      const url = `https://around-u-ma5e.onrender.com/api/search/?service=${searchService}&pincode=${pincode}&page=${pg}&limit=10`;
       const response = await fetch(url);
       const data = await response.json();
-      setResults(data.data || []);
+      const newResults = data.data || [];
+      if (pg === 1) {
+        setResults(newResults);
+      } else {
+        setResults(prev => [...prev, ...newResults]);
+      }
+      setPage(pg);
+      setHasMore(newResults.length === 10);
     } catch (error) {
       console.error("Search error:", error);
     } finally {
       setLoading(false);
+      setLoadingMore(false);
     }
   };
 
@@ -202,6 +213,20 @@ export default function DiscoveryScreen() {
             <View style={styles.emptyContainer}>
               <Text style={styles.emptyText}>No professionals found in this area.</Text>
             </View>
+          ) : null
+        }
+        ListFooterComponent={
+          hasMore ? (
+            <TouchableOpacity
+              style={styles.loadMoreButton}
+              onPress={() => handleSearch(service, page + 1)}
+              disabled={loadingMore}
+            >
+              {loadingMore
+                ? <ActivityIndicator color={theme.colors.white} />
+                : <Text style={styles.loadMoreText}>LOAD MORE</Text>
+              }
+            </TouchableOpacity>
           ) : null
         }
       />
@@ -391,5 +416,19 @@ const styles = StyleSheet.create({
   emptyText: {
     color: theme.colors.inkMuted,
     fontFamily: fonts.bodyStrong,
+  },
+  loadMoreButton: {
+    backgroundColor: theme.colors.cardDark,
+    padding: 16,
+    borderRadius: 16,
+    alignItems: 'center',
+    marginTop: 12,
+    marginBottom: 8,
+  },
+  loadMoreText: {
+    color: theme.colors.white,
+    fontFamily: fonts.heading,
+    fontSize: 14,
+    letterSpacing: 1,
   },
 });
