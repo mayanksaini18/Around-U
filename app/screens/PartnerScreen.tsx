@@ -15,12 +15,13 @@ export default function PartnerScreen() {
   const contentWidth = wide ? 720 : 520;
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
-    name: "", phone: "", service: "", pincode: "", location: "", city: "",
+    name: "", phone: "", service: "", pincode: "", location: "", city: "", price: "", bio: "",
   });
 
   const handleSubmit = async () => {
-    if (Object.values(form).some(value => !value)) {
-      Alert.alert("MISSING INFO", "Please fill all fields to join the network.");
+    const required = { name: form.name, phone: form.phone, service: form.service, pincode: form.pincode, location: form.location, city: form.city };
+    if (Object.values(required).some(value => !value)) {
+      Alert.alert("MISSING INFO", "Please fill all required fields to join the network.");
       return;
     }
 
@@ -30,15 +31,18 @@ export default function PartnerScreen() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          ...form,
+          name: form.name, phone: form.phone,
           service: form.service.toLowerCase(),
           pincode: form.pincode.trim(),
+          location: form.location, city: form.city,
+          ...(form.price && { price: form.price }),
+          ...(form.bio && { bio: form.bio }),
         }),
       });
 
       if (response.ok) {
         Alert.alert("WELCOME ABOARD", "We'll verify your skills and contact you shortly.");
-        setForm({ name: "", phone: "", service: "", pincode: "", location: "", city: "" });
+        setForm({ name: "", phone: "", service: "", pincode: "", location: "", city: "", price: "", bio: "" });
       } else {
         Alert.alert("ERROR", "Submission failed. Please try again.");
       }
@@ -121,6 +125,19 @@ export default function PartnerScreen() {
           {renderInput("location-outline", "PINCODE", form.pincode, "pincode", "numeric")}
           {renderInput("business-outline", "AREA / LOCATION", form.location, "location")}
           {renderInput("map-outline", "CITY", form.city, "city")}
+          {renderInput("pricetag-outline", "STARTING PRICE (optional)", form.price, "price")}
+          <View style={styles.inputWrapper}>
+            <Ionicons name="document-text-outline" size={18} color={theme.colors.inkSoft} style={{ marginTop: 2 }} />
+            <TextInput
+              style={[styles.input, { height: 80, textAlignVertical: 'top' }]}
+              placeholder="SHORT BIO (optional)"
+              placeholderTextColor={theme.colors.inkMuted}
+              value={form.bio}
+              onChangeText={(text) => setForm({ ...form, bio: text.slice(0, 300) })}
+              multiline
+              maxLength={300}
+            />
+          </View>
 
           <TouchableOpacity
             style={[styles.submitButton, { padding: compact ? 17 : 19 }]}
