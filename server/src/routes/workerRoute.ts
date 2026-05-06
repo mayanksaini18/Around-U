@@ -74,4 +74,22 @@ router.post(
   }
 );
 
+router.patch("/:id/availability", async (req: Request, res: Response) => {
+  const { available } = req.body;
+  if (typeof available !== "boolean") {
+    return res.status(400).json({ message: "available must be a boolean" });
+  }
+  try {
+    const provider = await Provider.findByIdAndUpdate(
+      req.params.id,
+      { available },
+      { new: true, select: "name available" }
+    );
+    if (!provider) return res.status(404).json({ message: "Provider not found" });
+    res.json({ message: "success", data: provider });
+  } catch {
+    res.status(400).json({ message: "Invalid provider ID" });
+  }
+});
+
 export default router;
