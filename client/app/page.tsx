@@ -21,7 +21,7 @@ export default function LandingPage() {
       <HowItWorks />
       <Testimonials />
       <FAQ />
-      {/* <CTA /> */}
+      <CTA />
       <Footer />
     </main>
   );
