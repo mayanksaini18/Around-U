@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import searchRoutes from "./routes/search.route.js";
 import workerRoutes from "./routes/workerRoute.js";
+import reviewRoutes from "./routes/review.route.js";
 import { errorHandler, notFound } from "./middleware/error.js";
 
 dotenv.config();
@@ -37,6 +38,7 @@ app.get("/", (_req, res) => {
 
 app.use("/api/search", searchRoutes);
 app.use("/api/worker", workerRoutes);
+app.use("/api/review", reviewRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
