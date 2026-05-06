@@ -16,7 +16,7 @@ export default function LandingPage() {
       <Navbar />
       <Hero />
       <ProblemGrid />
-      {/* <Features /> */}
+      <Features />
       {/* <Stats /> */}
       <HowItWorks />
       <Testimonials />
