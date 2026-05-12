@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Around-U — Capstone Presentation</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" />
+<style>
+  :root {
+    --green: #22c55e;
+    --green-light: #4ade80;
+    --green-pale: #dcfce7;
+    --black: #0a0a0a;
+    --gray-900: #111827;
+    --gray-700: #374151;
+    --gray-500: #6b7280;
+    --gray-300: #d1d5db;
+    --gray-100: #f3f4f6;
+    --gray-50: #f9fafb;
+    --white: #ffffff;
+  }
+
+  .reveal {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 36px;
+    color: var(--black);
+  }
+
+  .reveal .slides section {
+    text-align: left;
+    height: 100%;
+    padding: 0;
+  }
+
+  /* ── TITLE SLIDE ── */
+  .slide-title {
+    background: var(--white);
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .slide-title::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: var(--green);
+  }
+  .slide-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 6px;
+    background: var(--green);
+  }
+  .slide-title .grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(to right, #8080800a 1px, transparent 1px),
+                      linear-gradient(to bottom, #8080800a 1px, transparent 1px);
+    background-size: 28px 28px;
+    z-index: 0;
+  }
+  .slide-title .content { position: relative; z-index: 1; }
+  .slide-title h1 {
+    font-size: 5em;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--black);
+    margin: 0 0 0.08em;
+  }
+  .slide-title .underline-bar {
+    width: 55%;
+    height: 6px;
+    background: var(--green);
+    margin: 0 auto 0.35em;
+    border-radius: 3px;
+  }
+  .slide-title .subtitle {
+    font-size: 0.6em;
+    color: var(--gray-500);
+    font-style: italic;
+    margin: 0 0 0.3em;
+  }
+  .slide-title .tagline {
+    font-size: 0.38em;
+    color: var(--green);
+    font-style: italic;
+    margin: 0 0 0.6em;
+  }
+  .slide-title .meta {
+    font-size: 0.33em;
+    color: var(--gray-500);
+    line-height: 1.7;
+  }
+  .slide-title .meta strong { color: var(--gray-700); }
+
+  /* ── STANDARD SLIDE ── */
+  .slide-std {
+    background: var(--white);
+    padding: 0 !important;
+  }
+  .slide-header {
+    background: var(--white);
+    border-bottom: 3px solid var(--green);
+    padding: 18px 50px 14px;
+  }
+  .slide-header h2 {
+    font-size: 0.85em;
+    font-weight: 800;
+    color: var(--black);
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+  .slide-header .sub {
+    font-size: 0.38em;
+    color: var(--gray-500);
+    font-style: italic;
+    margin-top: 2px;
+    font-weight: 400;
+  }
+  .slide-body {
+    padding: 22px 50px 18px;
+  }
+  
+  /* ── CARDS ── */
+  .cards-3, .cards-2, .cards-4 {
+    display: grid;
+    gap: 16px;
+  }
+  .cards-3 { grid-template-columns: repeat(3, 1fr); }
+  .cards-2 { grid-template-columns: repeat(2, 1fr); }
+  .cards-4 { grid-template-columns: repeat(4, 1fr); }
+
+  .card {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-300);
+    border-top: 4px solid var(--green);
+    border-radius: 8px;
+    padding: 16px 18px;
+  }
+  .card.dark {
+    background: var(--black);
+    border-color: var(--black);
+    border-top-color: var(--green);
+  }
+  .card.dark h3, .card.dark p, .card.dark .card-label { color: var(--white); }
+  .card.dark p { color: var(--gray-300); }
+  .card h3 {
+    font-size: 0.44em;
+    font-weight: 700;
+    color: var(--black);
+    margin: 0 0 6px;
+  }
+  .card p {
+    font-size: 0.36em;
+    color: var(--gray-700);
+    margin: 0;
+    line-height: 1.5;
+  }
+  .card .num {
+    font-size: 0.9em;
+    font-weight: 900;
+    color: var(--green);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .card .card-label {
+    font-size: 0.3em;
+    color: var(--gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+
+  /* ── BULLET LIST ── */
+  .blist {
+    list-style: none;
+    padding: 0; margin: 0;
+  }
+  .blist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.42em;
+    color: var(--gray-700);
+    margin-bottom: 10px;
+    line-height: 1.45;
+  }
+  .blist li::before {
+    content: '';
+    flex-shrink: 0;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    margin-top: 6px;
+  }
+
+  /* ── AGENDA ── */
+  .agenda-grid {
+    display: block;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .agenda-item {
+    display: flex;
+    align-items: center;
+    gap: 4;
+    padding: 10px;
+    background: var(--gray-50);
+    overflow: hidden;
+  }
+  .agenda-num {
+    font-size: 0.4em;
+    padding: 10px 14px;
+    min-width: 46px;
+    text-align: center;
+  }
+  .agenda-label {
+    font-size: 0.38em;
+    color: var(--gray-700);
+    padding: 0 16px;
+    font-weight: 600;
+  }
+
+  /* ── ARCH DIAGRAM ── */
+  .arch-box {
+    border: 2px solid var(--gray-300);
+    border-radius: 8px;
+    padding: 10px 16px;
+    background: var(--gray-50);
+    text-align: center;
+    font-size: 0.38em;
+    font-weight: 600;
+    color: var(--black);
+  }
+  .arch-box.accent { border-top: 4px solid var(--green); }
+  .arch-box.dark-box {
+    background: var(--black);
+    border-color: var(--black);
+    border-top: 4px solid var(--green);
+    color: var(--white);
+  }
+  .arch-box.dark-box small { color: var(--gray-300); }
+  .arch-box small { display: block; font-size: 0.85em; font-weight: 400; color: var(--gray-500); margin-top: 2px; }
+  .arch-row { display: grid; gap: 14px; margin-bottom: 10px; }
+  .arch-row-2 { grid-template-columns: 1fr 1fr; }
+  .arch-arrow {
+    text-align: center;
+    font-size: 0.35em;
+    color: var(--gray-500);
+    font-weight: 600;
+    margin: 4px 0;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── UPDATED PROBLEM SLIDE CSS ── */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    align-items: stretch;
+  }
+
+  .p-card {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 24px;
+    padding: 32px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* The large background number */
+  .p-card::after {
+    content: attr(data-num);
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 80px;
+    font-weight: 900;
+    color: #f1f5f9;
+    z-index: 0;
+  }
+
+  .p-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .p-card h3 {
+    font-size: 24px !important;
+    font-weight: 800 !important;
+    margin-bottom: 12px !important;
+    color: #0f172a;
+  }
+
+  .p-quote {
+    font-size: 16px;
+    color: #64748b;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    min-height: 50px;
+  }
+
+  .solution-box {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid #f1f5f9;
+  }
+
+  .sol-tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #059669;
+    font-weight: 800;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+
+  .sol-text {
+    font-size: 15px;
+    color: #334155;
+    line-height: 1.5;
+  }
+
+  /* Dark Card for Trust/Security */
+  .p-card.featured {
+    background: #0f172a;
+    border: none;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  }
+
+  .p-card.featured h3 { color: #ffffff; }
+  .p-card.featured .p-quote { color: #94a3b8; }
+  .p-card.featured::after { color: #1e293b; }
+  
+  .p-card.featured .solution-box {
+    background: rgba(5, 150, 105, 0.1);
+    border: 1px solid #059669;
+    padding: 16px;
+    border-radius: 16px;
+  }
+  
+  .p-card.featured .sol-tag { color: #34d399; }
+  .p-card.featured .sol-text { color: #ecfdf5; }
+  /* ── TABLE ── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.36em;
+  }
+  .data-table th {
+    background: var(--black);
+    color: var(--white);
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 700;
+  }
+  .data-table td {
+    padding: 7px 12px;
+    color: var(--gray-700);
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .data-table tr:nth-child(even) td { background: var(--gray-50); }
+  .data-table tr:nth-child(odd) td { background: var(--white); }
+  .data-table .key { color: var(--black); font-weight: 600; }
+  .data-table .indexed { color: var(--green); font-weight: 700; }
+
+  /* ── TEAM ROWS ── */
+  .team-row {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin-bottom: 9px;
+    border: 1px solid var(--gray-300);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .team-name {
+    background: var(--black);
+    color: var(--white);
+    padding: 10px 14px;
+    min-width: 170px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .team-name strong { font-size: 0.38em; display: block; }
+  .team-name span { font-size: 0.28em; color: var(--green-light); font-style: italic; margin-top: 2px; display: block; }
+  .team-desc {
+    background: var(--gray-50);
+    padding: 10px 16px;
+    font-size: 0.36em;
+    color: var(--gray-700);
+    display: flex;
+    align-items: center;
+    line-height: 1.45;
+    border-left: 4px solid var(--green);
+  }
+
+  /* ── ACHIEVEMENT ROWS ── */
+  .ach-row {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin-bottom: 9px;
+    border: 1px solid var(--gray-300);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .ach-num {
+    background: var(--green);
+    color: var(--white);
+    font-size: 0.5em;
+    font-weight: 900;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 52px;
+  }
+  .ach-content {
+    background: var(--white);
+    padding: 10px 16px;
+    border-left: 3px solid var(--gray-100);
+  }
+  .ach-content strong { font-size: 0.38em; color: var(--black); display: block; }
+  .ach-content p { font-size: 0.33em; color: var(--gray-700); margin: 3px 0 0; line-height: 1.45; }
+
+  /* ── API CODE ── */
+  .code-block {
+    background: var(--gray-900);
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.34em;
+    line-height: 1.6;
+    color: #e2e8f0;
+    overflow: hidden;
+  }
+  .code-block .method-post { color: #4ade80; font-weight: 700; }
+  .code-block .method-get  { color: #60a5fa; font-weight: 700; }
+  .code-block .path        { color: #fde68a; }
+  .code-block .comment     { color: #6b7280; }
+  .code-block .key         { color: #f9a8d4; }
+  .code-block .val         { color: #a5f3fc; }
+
+  /* ── DEPLOY CARDS ── */
+  .deploy-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .deploy-card {
+    border: 1px solid var(--gray-300);
+    border-top: 4px solid var(--black);
+    border-radius: 8px;
+    padding: 14px 18px;
+    background: var(--white);
+  }
+  .deploy-card .d-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+  }
+  .deploy-card h3 { font-size: 0.44em; font-weight: 700; color: var(--black); margin: 0; }
+  .deploy-card .platform { font-size: 0.32em; color: var(--green); font-weight: 700; }
+  .deploy-card .url { font-size: 0.32em; color: var(--gray-500); font-style: italic; margin-bottom: 6px; }
+  .deploy-card p { font-size: 0.34em; color: var(--gray-700); margin: 0; line-height: 1.45; }
+
+  /* ── THANK YOU ── */
+  .slide-thankyou {
+    background: var(--white);
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+  }
+  .slide-thankyou::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 6px;
+    background: var(--green);
+  }
+  .slide-thankyou::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0; height: 6px;
+    background: var(--green);
+  }
+  .slide-thankyou .grid-bg {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(to right, #8080800a 1px, transparent 1px),
+                      linear-gradient(to bottom, #8080800a 1px, transparent 1px);
+    background-size: 28px 28px; z-index: 0;
+  }
+  .slide-thankyou .content { position: relative; z-index: 1; }
+  .slide-thankyou h1 { font-size: 3.5em; font-weight: 900; color: var(--black); margin: 0 0 0.1em; }
+  .slide-thankyou .live-url { font-size: 1.1em; font-weight: 800; color: var(--green); margin: 0.1em 0; }
+  .slide-thankyou .divider { width: 200px; height: 4px; background: var(--black); margin: 0.3em auto; border-radius: 2px; }
+  .slide-thankyou .qtext { font-size: 0.7em; font-weight: 700; color: var(--black); margin: 0.2em 0; }
+  .slide-thankyou .meta { font-size: 0.35em; color: var(--gray-500); line-height: 1.7; }
+  .slide-thankyou .github { font-size: 0.38em; color: var(--gray-500); margin-top: 0.1em; }
+
+  /* ── TWO-COL ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  /* ── Reveal overrides ── */
+  .reveal h1, .reveal h2, .reveal h3 { text-transform: none; }
+  .reveal .progress span { background: var(--green); }
+  .reveal .controls { color: var(--green); }
+  .reveal .slide-number { color: var(--gray-500); font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ═══════════ SLIDE 1 — TITLE ═══════════ -->
+<section class="slide-title">
+  <div class="grid-bg"></div>
+  <div class="content">
+    <h1>AROUND-U</h1>
+    <div class="underline-bar"></div>
+    <p class="subtitle">A Hyperlocal Service Marketplace Platform</p>
+    <p class="tagline">"Any task. Any moment. Verified experts at your door."</p>
+    <div class="meta">
+      Capstone-I Project &nbsp;·&nbsp; IIT Patna &nbsp;·&nbsp; Hybrid UG in AI &amp; Cybersecurity<br/>
+      <strong>Mayank Saini · Jatin Saini · Md Sakib · Kavya Saksham · Md Sameer Ansari</strong><br/>
+      Group 124 &nbsp;·&nbsp; March 2026 &nbsp;·&nbsp; aroundu.space
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SLIDE 2 — AGENDA ═══════════ -->
+<section class="slide-std">
+  <div class="slide-header">
+    <h2>Agenda</h2>
+  </div>
+  <div class="slide-body">
+    <div class="agenda-grid">
+      <div class="agenda-item"><div class="agenda-num">01</div><div class="agenda-label">Problem Statement</div></div>
+      <div class="agenda-item"><div class="agenda-num">02</div><div class="agenda-label">Our Solution</div></div>
+      <div class="agenda-item"><div class="agenda-num">03</div><div class="agenda-label">System Architecture</div></div>
+      <div class="agenda-item"><div class="agenda-num">04</div><div class="agenda-label">Key Achievements</div></div>
+      <div class="agenda-item"><div class="agenda-num">05</div><div class="agenda-label">Future Roadmap</div></div>
+      <div class="agenda-item"><div class="agenda-num">06</div><div class="agenda-label">Team &amp; Q&amp;A</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SLIDE 3 — PROBLEM ═══════════ -->
+<!-- <section class="slide-std">
+  <div class="slide-header">
+    <h2>The Problem</h2>
+    <div class="sub">Pain points that drove us to build Around-U</div>
+  </div>
+  <div class="slide-body">
+    <div class="cards-3">
+      <div class="card">
+        <div class="num">01</div>
+        <img src="path/to/image1.jpg" alt="Endless Calling">
+        <h3>Endless Calling</h3>
+        <p>Users call multiple providers with no guarantee of availability — wasting hours with no result.</p>
+      </div>
+      <div class="card">
+        <div class="num">02</div>
+        <h3>Random Pricing</h3>
+        <p>Providers quote one price over the phone, then charge more on arrival. Zero transparency.</p>
+      </div>
+      <div class="card">
+        <div class="num">03</div>
+        <h3>The Trust Gap</h3>
+        <p>Allowing strangers into your home is a safety risk. Most platforms do zero background verification.</p>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<section>
+  <div class="header-wrap">
+    <h2>The Market Friction</h2>
+    <p>Current challenges vs. The Around-U Solution</p>
+  </div>
+
+  <div class="problem-grid">
+    <!-- Card 01 -->
+    <div class="p-card" data-num="01">
+      <h3>Endless Calling</h3>
+      <p class="p-quote">"I called three plumbers. One didn't pick up, two are busy until next week."</p>
+      <div class="solution-box">
+        <div class="sol-tag">✓ Around-U Solution</div>
+        <p class="sol-text">Hyperlocal Pincode Indexing. View real-time availability in your neighborhood in seconds.</p>
+      </div>
+    </div>
+
+    <!-- Card 02 -->
+    <div class="p-card" data-num="02">
+      <h3>Random Pricing</h3>
+      <p class="p-quote">"He quoted ₹500 on the phone but asked for ₹1200 after arriving."</p>
+      <div class="solution-box">
+        <div class="sol-tag">✓ Around-U Solution</div>
+        <p class="sol-text">Upfront Transparency. Lock your price with the provider before the work starts.</p>
+      </div>
+    </div>
+
+    <!-- Card 03: Featured/Security -->
+    <div class="p-card featured" data-num="03">
+      <h3>The Trust Gap</h3>
+      <p class="p-quote">"Allowing strangers into your home is scary. How do I know they are safe?"</p>
+      <div class="solution-box">
+        <div class="sol-tag">✓ 100% Verified IDs</div>
+        <p class="sol-text">Mandatory ID and phone verification for every provider before they can join.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ SLIDE 4 — SOLUTION ═══════════ -->
+<section class="slide-std">
+  <div class="slide-header">
+    <h2>Our Solution</h2>
+    <div class="sub">Direct peer-to-peer, zero-commission hyperlocal marketplace</div>
+  </div>
+  <div class="slide-body">
+    <p style="font-size:0.42em;color:var(--gray-700);margin:0 0 16px;">Search verified professionals by service + pincode. Connect instantly. No middlemen, no commissions, no delays.</p>
+    <div class="cards-3" style="grid-template-columns:repeat(3,1fr);row-gap:12px;">
+      <div class="card"><h3>Zero Commissions</h3><p>Workers keep 100% of earnings — no platform cut.</p></div>
+      <div class="card"><h3>Broadcast Model</h3><p>Task broadcast so only available workers respond.</p></div>
+      <div class="card"><h3>Upfront Pricing</h3><p>Price agreed before work begins — no surprises.</p></div>
+      <div class="card"><h3>Verified Providers</h3><p>Aadhaar ID + phone verification before listing.</p></div>
+      <div class="card"><h3>Pincode Search</h3><p>Hyperlocal filtering finds workers in your area.</p></div>
+      <div class="card"><h3>One-Tap Contact</h3><p>Direct phone call button — no messaging delays.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SLIDE 5 — TARGET USERS ═══════════ -->
+<section class="slide-std">
+  <div class="slide-header"><h2>Target Users</h2></div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div class="card" style="border-top:4px solid var(--green);">
+        <h3 style="font-size:0.5em;margin-bottom:12px;">Help Seekers (Customers)</h3>
+        <ul class="blist">
+          <li>Individuals needing on-demand household help</li>
+          <li>Plumbers, electricians, cleaners, tutors in minutes</li>
+          <li>Direct contact — no intermediary overhead</li>
+          <li>Transparent pricing before service begins</li>
+          <li>Hyperlocal — within their own neighbourhood</li>
+        </ul>
+      </div>
+      <div class="card" style="border-top:4px solid var(--black);">
+        <h3 style="font-size:0.5em;margin-bottom:12px;">Service Professionals (Partners)</h3>
+        <ul class="blist" style="--dot-color:var(--black)">
+          <li>Skilled workers: plumbers, electricians, painters</li>
+          <li>Earn 100% of what they charge — no commissions</li>
+          <li>Flexible hours, build a local client base</li>
+          <li>Aadhaar + phone verification builds trust</li>
+          <li>Reach customers they'd never find otherwise</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  /* ──────────────────────────────────────────────────────────
+     SLIDE 6: API DESIGN (Namespace: .st-api)
+  ────────────────────────────────────────────────────────── */
+  .st-api { padding: 40px 60px !important; }
+  .st-api .head { border-left: 6px solid var(--p-green); padding-left: 20px; margin-bottom: 30px; }
+  .st-api .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .st-api .code-box { background: var(--p-black); border-radius: 16px; padding: 25px; color: #e2e8f0; font-family: 'SF Mono', monospace; font-size: 0.35em; line-height: 1.6; }
+  .st-api .method { color: #34d399; font-weight: 800; }
+  .st-api .schema-card { background: white; border: 1px solid #e2e8f0; border-radius: 16px; padding: 25px; position: relative; overflow: hidden; }
+  .st-api .schema-card h3 { font-size: 20px !important; font-weight: 800; margin-bottom: 15px; }
+  .st-api .schema-list p { font-size: 14px; color: #64748b; margin: 8px 0; display: flex; align-items: center; gap: 8px; }
+  .st-api .schema-list strong { color: var(--p-black); }
+</style>
+<!-- ═══════════ SLIDE 6 — ARCHITECTURE ═══════════ -->
+<section class="slide-std">
+  <div class="slide-header">
+    <h2>System Architecture</h2>
+    <div class="sub">Three-tier, multi-platform design</div>
+  </div>
+  <div class="slide-body">
+    <div style="font-size:0.3em;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Clients</div>
+    <div class="arch-row arch-row-2" style="margin-bottom:0;">
+      <div class="arch-box accent"><strong>Next.js Web App</strong><small>aroundu.space</small></div>
+      <div class="arch-box" style="border-top:4px solid var(--black);"><strong>React Native (Expo)</strong><small>iOS / Android</small></div>
+    </div>
+    <div class="arch-arrow">▼ &nbsp; HTTPS / REST API &nbsp; ▼</div>
+    <div class="arch-box dark-box" style="margin-bottom:8px;">
+      <strong>BACKEND — Node.js + Express.js (TypeScript) — Deployed on Render</strong>
+      <small>POST /api/worker/register &nbsp;&nbsp;·&nbsp;&nbsp; GET /api/search?service=&amp;pincode=</small>
+    </div>
+    <div class="arch-arrow">▼ &nbsp; Mongoose ODM &nbsp; ▼</div>
+    <div class="arch-box accent" style="max-width:55%;margin:0 auto;">
+      <strong>MongoDB Atlas</strong>
+      <small>Provider Collection &nbsp;|&nbsp; Index: (pincode, service)</small>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SLIDE 7 — TECH STACK ═══════════ -->
+
+
+<!-- ═══════════ SLIDE 8 — WEB APP ═══════════ -->
+
+
+
+
+<!-- ═══════════ SLIDE 10 — API & DB ═══════════ -->
+<section class="st-api">
+    <div class="head">
+      <h2>API & Database Design</h2>
+    </div>
+    <div class="grid">
+      <div class="code-box">
+        <p><span class="method">POST</span> /api/worker/register</p>
+        <p style="color: #64748b;">// Payload Example</p>
+        <p>{ "service": "Electrician",<br/>&nbsp;&nbsp;"pincode": "801103" }</p>
+        <br/>
+        <p><span class="method">GET</span> /api/search?pincode=801103</p>
+      </div>
+      <div class="schema-card">
+        <h3>MongoDB Schema</h3>
+        <div class="schema-list">
+          <p>• <strong>Index:</strong> { pincode: 1, service: 1 }</p>
+          <p>• <strong>Auth:</strong> Unique Mobile Verification</p>
+          <p>• <strong>ID:</strong> Aadhaar Verification Logic</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+<!-- ═══════════ SLIDE 13 — ACHIEVEMENTS ═══════════ -->
+<section class="slide-std">
+  <div class="slide-header"><h2>Key Achievements</h2></div>
+  <div class="slide-body">
+    <div class="ach-row"><div class="ach-num">1</div><div class="ach-content"><strong>API Design &amp; Implementation</strong><p>RESTful endpoints for provider registration and location-based discovery, with compound indexing for optimised queries.</p></div></div>
+    <div class="ach-row"><div class="ach-num">2</div><div class="ach-content"><strong>Full-Stack Web Development</strong><p>Responsive landing, service discovery, and partner onboarding pages using Next.js 16 and Tailwind CSS v4.</p></div></div>
+    <div class="ach-row"><div class="ach-num">3</div><div class="ach-content"><strong>Cross-Platform Mobile App</strong><p>React Native (Expo) app with bottom-tab navigation, search, and registration — targeting iOS and Android.</p></div></div>
+    <div class="ach-row"><div class="ach-num">4</div><div class="ach-content"><strong>Database Integration</strong><p>MongoDB Atlas with compound (pincode, service) index — significantly faster than full collection scans.</p></div></div>
+    <div class="ach-row"><div class="ach-num">5</div><div class="ach-content"><strong>End-to-End Production Deployment</strong><p>Live system: web on Vercel, API on Render, DB on MongoDB Atlas — single shared TypeScript backend.</p></div></div>
+  </div>
+</section>
+
+<!-- ═══════════ SLIDE 14 — FUTURE WORK ═══════════ -->
+<section class="slide-std">
+  <div class="slide-header">
+    <h2>Future Roadmap</h2>
+    <div class="sub">Planned enhancements for subsequent phases</div>
+  </div>
+  <div class="slide-body">
+    <div class="cards-4" style="row-gap:12px;">
+      <div class="card"><div class="num" style="font-size:0.55em;">01</div><h3>Real-Time Matching</h3><p>WebSocket live availability status</p></div>
+      <div class="card"><div class="num" style="font-size:0.55em;">02</div><h3>Ratings &amp; Reviews</h3><p>Post-service reviews for trust</p></div>
+      <div class="card"><div class="num" style="font-size:0.55em;">03</div><h3>JWT Auth</h3><p>Persistent customer &amp; provider sessions</p></div>
+      <div class="card"><div class="num" style="font-size:0.55em;">04</div><h3>In-App Messaging</h3><p>Real-time chat before booking</p></div>
+      <div class="card"><div class="num" style="font-size:0.55em;">05</div><h3>Payments</h3><p>UPI &amp; card-based processing</p></div>
+      <div class="card"><div class="num" style="font-size:0.55em;">06</div><h3>Advanced Filters</h3><p>Price, distance, ratings sort</p></div>
+      <div class="card"><div class="num" style="font-size:0.55em;">07</div><h3>Admin Dashboard</h3><p>Verification &amp; analytics</p></div>
+      <div class="card"><div class="num" style="font-size:0.55em;">08</div><h3>Push Notifications</h3><p>Booking confirmations &amp; updates</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SLIDE 15 — TEAM ═══════════ -->
+<section class="slide-std">
+  <div class="slide-header">
+    <h2>Team — Individual Contributions</h2>
+    <div class="sub">Group 124 · IIT Patna</div>
+  </div>
+  <div class="slide-body">
+    <div class="team-row">
+      <div class="team-name"><strong>Mayank Saini</strong><span>Full-Stack Engineering &amp; Architecture</span></div>
+      <div class="team-desc">End-to-end system design · Node.js/Express backend · MongoDB schema · Next.js web client · React Native mobile app (navigation, search, FindHelp UI)</div>
+    </div>
+    <div class="team-row">
+      <div class="team-name"><strong>Kavya Saksham</strong><span>Product Strategy &amp; Data Engineering</span></div>
+      <div class="team-desc">Concept ideation · deep-dive market research · validated product-market fit · engineered the database to house the team's competitive edge</div>
+    </div>
+    <div class="team-row">
+      <div class="team-name"><strong>Md Sameer Ansari</strong><span>UX Research &amp; Experience Design</span></div>
+      <div class="team-desc">Field interviews · user journey mapping · designed the mobile interface flow for a seamless service-booking experience for non-tech-savvy users</div>
+    </div>
+    <div class="team-row">
+      <div class="team-name"><strong>Md Sakib</strong><span>Resource &amp; Vendor Management</span></div>
+      <div class="team-desc">High-quality data sourcing · managed and coordinated skilled professionals (electricians, plumbers) to ensure service reliability</div>
+    </div>
+    <div class="team-row">
+      <div class="team-name"><strong>Jatin Saini</strong><span>Project Management &amp; QA</span></div>
+      <div class="team-desc">Sprint coordination · platform-wide functional testing · data integrity · oversaw end-to-end quality across both web and mobile surfaces</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SLIDE 16 — THANK YOU ═══════════ -->
+<section class="slide-thankyou">
+  <div class="grid-bg"></div>
+  <div class="content">
+    <h1>Thank You!</h1>
+    <div class="live-url">aroundu.space</div>
+    <div class="divider"></div>
+    <div class="qtext">Questions?</div>
+    <div class="github">github.com/mayanksaini18/Around-U</div>
+    <div class="meta">
+      Mayank Saini · UA2503AIH297 · Group 124<br/>
+      Hybrid UG in AI &amp; Cybersecurity · IIT Patna · March 2026
+    </div>
+  </div>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  slideNumber: 'c/t',
+  transition: 'fade',
+  transitionSpeed: 'fast',
+  controls: true,
+  progress: true,
+  center: false,
+  width: 1280,
+  height: 720,
+  margin: 0,
+  minScale: 0.2,
+  maxScale: 2.0,
+});
+</script>
+</body>
+</html>
