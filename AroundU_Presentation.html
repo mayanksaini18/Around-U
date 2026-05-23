@@ -19,6 +19,8 @@
     --gray-100: #f3f4f6;
     --gray-50: #f9fafb;
     --white: #ffffff;
+    --p-green: #22c55e;
+    --p-black: #0a0a0a;
   }
 
   .reveal {
@@ -43,20 +45,6 @@
     text-align: center;
     position: relative;
     overflow: hidden;
-  }
-  .slide-title::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 6px;
-    background: var(--green);
-  }
-  .slide-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 6px;
-    background: var(--green);
   }
   .slide-title .grid-bg {
     position: absolute;
@@ -493,18 +481,6 @@
     text-align: center;
     position: relative;
   }
-  .slide-thankyou::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; height: 6px;
-    background: var(--green);
-  }
-  .slide-thankyou::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0; height: 6px;
-    background: var(--green);
-  }
   .slide-thankyou .grid-bg {
     position: absolute; inset: 0;
     background-image: linear-gradient(to right, #8080800a 1px, transparent 1px),
@@ -594,12 +570,12 @@
   </div>
 </section> -->
 
-<section>
-  <div class="header-wrap">
+<section class="slide-std">
+  <div class="slide-header">
     <h2>The Market Friction</h2>
-    <p>Current challenges vs. The Around-U Solution</p>
+    <div class="sub">Current challenges vs. The Around-U Solution</div>
   </div>
-
+  <div class="slide-body">
   <div class="problem-grid">
     <!-- Card 01 -->
     <div class="p-card" data-num="01">
@@ -631,6 +607,7 @@
       </div>
     </div>
   </div>
+  </div>
 </section>
 
 
@@ -641,42 +618,59 @@
     <div class="sub">Direct peer-to-peer, zero-commission hyperlocal marketplace</div>
   </div>
   <div class="slide-body">
-    <p style="font-size:0.42em;color:var(--gray-700);margin:0 0 16px;">Search verified professionals by service + pincode. Connect instantly. No middlemen, no commissions, no delays.</p>
-    <div class="cards-3" style="grid-template-columns:repeat(3,1fr);row-gap:12px;">
-      <div class="card"><h3>Zero Commissions</h3><p>Workers keep 100% of earnings — no platform cut.</p></div>
-      <div class="card"><h3>Broadcast Model</h3><p>Task broadcast so only available workers respond.</p></div>
-      <div class="card"><h3>Upfront Pricing</h3><p>Price agreed before work begins — no surprises.</p></div>
-      <div class="card"><h3>Verified Providers</h3><p>Aadhaar ID + phone verification before listing.</p></div>
-      <div class="card"><h3>Pincode Search</h3><p>Hyperlocal filtering finds workers in your area.</p></div>
-      <div class="card"><h3>One-Tap Contact</h3><p>Direct phone call button — no messaging delays.</p></div>
+    <div class="problem-grid" style="grid-template-columns:repeat(3,1fr);gap:18px;">
+      <div class="p-card" data-num="01">
+        <h3>Zero Commissions</h3>
+        <p class="p-quote">Workers keep 100% of their earnings — the platform never takes a cut.</p>
+      </div>
+      <div class="p-card" data-num="02">
+        <h3>Broadcast Model</h3>
+        <p class="p-quote">Tasks broadcast to nearby workers so only available providers respond.</p>
+      </div>
+      <div class="p-card featured" data-num="03">
+        <h3>Upfront Pricing</h3>
+        <p class="p-quote">Price locked before work begins — zero surprise charges on arrival.</p>
+        <div class="solution-box">
+          <div class="sol-tag">✓ Zero Disputes</div>
+          <p class="sol-text">Both parties agree before the job starts.</p>
+        </div>
+      </div>
+      <div class="p-card" data-num="04">
+        <h3>Verified Providers</h3>
+        <p class="p-quote">Aadhaar ID + phone verification before any listing goes live.</p>
+      </div>
+      <div class="p-card" data-num="05">
+        <h3>Pincode Search</h3>
+        <p class="p-quote">Hyperlocal filtering surfaces workers in your exact neighbourhood.</p>
+      </div>
+      <div class="p-card" data-num="06">
+        <h3>One-Tap Contact</h3>
+        <p class="p-quote">Direct phone call button — no messaging delays or intermediaries.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ═══════════ SLIDE 5 — TARGET USERS ═══════════ -->
 <section class="slide-std">
-  <div class="slide-header"><h2>Target Users</h2></div>
+  <div class="slide-header"><h2>Target Users</h2><div class="sub">Two sides of the Around-U marketplace</div></div>
   <div class="slide-body">
-    <div class="two-col">
-      <div class="card" style="border-top:4px solid var(--green);">
-        <h3 style="font-size:0.5em;margin-bottom:12px;">Help Seekers (Customers)</h3>
-        <ul class="blist">
-          <li>Individuals needing on-demand household help</li>
-          <li>Plumbers, electricians, cleaners, tutors in minutes</li>
-          <li>Direct contact — no intermediary overhead</li>
-          <li>Transparent pricing before service begins</li>
-          <li>Hyperlocal — within their own neighbourhood</li>
-        </ul>
+    <div class="problem-grid" style="grid-template-columns:1fr 1fr;gap:24px;">
+      <div class="p-card" data-num="↗">
+        <h3>Help Seekers</h3>
+        <p class="p-quote">"I need a plumber in my area right now — verified and fairly priced."</p>
+        <div class="solution-box">
+          <div class="sol-tag">✓ Customer Benefits</div>
+          <p class="sol-text">On-demand household help · Transparent pricing · Direct contact · Hyperlocal search · Verified professionals</p>
+        </div>
       </div>
-      <div class="card" style="border-top:4px solid var(--black);">
-        <h3 style="font-size:0.5em;margin-bottom:12px;">Service Professionals (Partners)</h3>
-        <ul class="blist" style="--dot-color:var(--black)">
-          <li>Skilled workers: plumbers, electricians, painters</li>
-          <li>Earn 100% of what they charge — no commissions</li>
-          <li>Flexible hours, build a local client base</li>
-          <li>Aadhaar + phone verification builds trust</li>
-          <li>Reach customers they'd never find otherwise</li>
-        </ul>
+      <div class="p-card featured" data-num="↗">
+        <h3>Service Professionals</h3>
+        <p class="p-quote">"I want to earn more, work flexibly, and reach local customers directly."</p>
+        <div class="solution-box">
+          <div class="sol-tag">✓ Partner Benefits</div>
+          <p class="sol-text">100% earnings retained · Flexible hours · Local client base · Aadhaar-verified profile builds trust</p>
+        </div>
       </div>
     </div>
   </div>
@@ -694,6 +688,28 @@
   .st-api .schema-card h3 { font-size: 20px !important; font-weight: 800; margin-bottom: 15px; }
   .st-api .schema-list p { font-size: 14px; color: #64748b; margin: 8px 0; display: flex; align-items: center; gap: 8px; }
   .st-api .schema-list strong { color: var(--p-black); }
+
+  /* ── ARCH MODERN ── */
+  .arch-modern { display: grid; gap: 12px; }
+  .arch-tier-label { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+  .arch-tier { display: grid; gap: 12px; }
+  .arch-tier-2 { grid-template-columns: 1fr 1fr; }
+  .arch-node {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 16px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .arch-node.green-top { border-top: 4px solid var(--green); }
+  .arch-node.dark-node { background: #0f172a; border-color: #0f172a; border-top: 4px solid var(--green); }
+  .arch-node.dark-node strong { color: #ffffff; }
+  .arch-node.dark-node small { color: #94a3b8; }
+  .arch-node strong { font-size: 14px; font-weight: 800; color: #0f172a; display: block; }
+  .arch-node small { font-size: 11px; color: #64748b; display: block; margin-top: 3px; }
+  .arch-connector { text-align: center; font-size: 11px; color: #94a3b8; font-weight: 600; letter-spacing: 0.06em; padding: 2px 0; }
 </style>
 <!-- ═══════════ SLIDE 6 — ARCHITECTURE ═══════════ -->
 <section class="slide-std">
@@ -702,20 +718,30 @@
     <div class="sub">Three-tier, multi-platform design</div>
   </div>
   <div class="slide-body">
-    <div style="font-size:0.3em;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Clients</div>
-    <div class="arch-row arch-row-2" style="margin-bottom:0;">
-      <div class="arch-box accent"><strong>Next.js Web App</strong><small>aroundu.space</small></div>
-      <div class="arch-box" style="border-top:4px solid var(--black);"><strong>React Native (Expo)</strong><small>iOS / Android</small></div>
-    </div>
-    <div class="arch-arrow">▼ &nbsp; HTTPS / REST API &nbsp; ▼</div>
-    <div class="arch-box dark-box" style="margin-bottom:8px;">
-      <strong>BACKEND — Node.js + Express.js (TypeScript) — Deployed on Render</strong>
-      <small>POST /api/worker/register &nbsp;&nbsp;·&nbsp;&nbsp; GET /api/search?service=&amp;pincode=</small>
-    </div>
-    <div class="arch-arrow">▼ &nbsp; Mongoose ODM &nbsp; ▼</div>
-    <div class="arch-box accent" style="max-width:55%;margin:0 auto;">
-      <strong>MongoDB Atlas</strong>
-      <small>Provider Collection &nbsp;|&nbsp; Index: (pincode, service)</small>
+    <div class="arch-modern">
+      <div>
+        <div class="arch-tier-label">Clients</div>
+        <div class="arch-tier arch-tier-2">
+          <div class="arch-node green-top"><strong>Next.js Web App</strong><small>aroundu.space · Vercel</small></div>
+          <div class="arch-node" style="border-top:4px solid #0f172a;"><strong>React Native (Expo)</strong><small>iOS &amp; Android</small></div>
+        </div>
+      </div>
+      <div class="arch-connector">▼ &nbsp;&nbsp; HTTPS / REST API &nbsp;&nbsp; ▼</div>
+      <div>
+        <div class="arch-tier-label">Backend</div>
+        <div class="arch-node dark-node">
+          <strong>Node.js + Express.js (TypeScript) — Render</strong>
+          <small>POST /api/worker/register &nbsp;·&nbsp; GET /api/search?service=&amp;pincode=</small>
+        </div>
+      </div>
+      <div class="arch-connector">▼ &nbsp;&nbsp; Mongoose ODM &nbsp;&nbsp; ▼</div>
+      <div>
+        <div class="arch-tier-label">Database</div>
+        <div class="arch-node green-top" style="max-width:48%;margin:0 auto;">
+          <strong>MongoDB Atlas</strong>
+          <small>Provider Collection &nbsp;·&nbsp; Compound Index: (pincode, service)</small>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -736,17 +762,20 @@
     <div class="grid">
       <div class="code-box">
         <p><span class="method">POST</span> /api/worker/register</p>
-        <p style="color: #64748b;">// Payload Example</p>
-        <p>{ "service": "Electrician",<br/>&nbsp;&nbsp;"pincode": "801103" }</p>
+        <p><span class="method">GET</span>&nbsp;&nbsp;/api/search?service=&amp;pincode=&amp;page=</p>
+        <p><span class="method">GET</span>&nbsp;&nbsp;/api/worker/:id</p>
+        <p><span class="method">POST</span> /api/review/:id &nbsp;<span style="color:#64748b;">// rate-limited + Zod</span></p>
         <br/>
-        <p><span class="method">GET</span> /api/search?pincode=801103</p>
+        <p style="color:#64748b;">// search response</p>
+        <p>{ count, total, page,<br/>&nbsp;&nbsp;usedNearby, data:[ … ] }</p>
       </div>
       <div class="schema-card">
-        <h3>MongoDB Schema</h3>
+        <h3>Data Model — MongoDB / Mongoose</h3>
         <div class="schema-list">
-          <p>• <strong>Index:</strong> { pincode: 1, service: 1 }</p>
-          <p>• <strong>Auth:</strong> Unique Mobile Verification</p>
-          <p>• <strong>ID:</strong> Aadhaar Verification Logic</p>
+          <p>• <strong>Index:</strong> compound (pincode, service) — avoids full scan</p>
+          <p>• <strong>Aliases:</strong> plumber → pipe / leak / tap (synonym search)</p>
+          <p>• <strong>Nearby:</strong> pincode-prefix fallback when 0 exact match</p>
+          <p>• <strong>Dedup:</strong> unique index (phone, service)</p>
         </div>
       </div>
     </div>
@@ -773,15 +802,39 @@
     <div class="sub">Planned enhancements for subsequent phases</div>
   </div>
   <div class="slide-body">
-    <div class="cards-4" style="row-gap:12px;">
-      <div class="card"><div class="num" style="font-size:0.55em;">01</div><h3>Real-Time Matching</h3><p>WebSocket live availability status</p></div>
-      <div class="card"><div class="num" style="font-size:0.55em;">02</div><h3>Ratings &amp; Reviews</h3><p>Post-service reviews for trust</p></div>
-      <div class="card"><div class="num" style="font-size:0.55em;">03</div><h3>JWT Auth</h3><p>Persistent customer &amp; provider sessions</p></div>
-      <div class="card"><div class="num" style="font-size:0.55em;">04</div><h3>In-App Messaging</h3><p>Real-time chat before booking</p></div>
-      <div class="card"><div class="num" style="font-size:0.55em;">05</div><h3>Payments</h3><p>UPI &amp; card-based processing</p></div>
-      <div class="card"><div class="num" style="font-size:0.55em;">06</div><h3>Advanced Filters</h3><p>Price, distance, ratings sort</p></div>
-      <div class="card"><div class="num" style="font-size:0.55em;">07</div><h3>Admin Dashboard</h3><p>Verification &amp; analytics</p></div>
-      <div class="card"><div class="num" style="font-size:0.55em;">08</div><h3>Push Notifications</h3><p>Booking confirmations &amp; updates</p></div>
+    <div class="problem-grid" style="grid-template-columns:repeat(4,1fr);gap:14px;">
+      <div class="p-card" data-num="01" style="padding:20px 22px;">
+        <h3>Real-Time Matching</h3>
+        <p class="p-quote">WebSocket live availability status for instant connections.</p>
+      </div>
+      <div class="p-card" data-num="02" style="padding:20px 22px;">
+        <h3>Ratings &amp; Reviews</h3>
+        <p class="p-quote">Post-service reviews to build provider trust scores.</p>
+      </div>
+      <div class="p-card" data-num="03" style="padding:20px 22px;">
+        <h3>JWT Auth</h3>
+        <p class="p-quote">Persistent sessions for customers and service providers.</p>
+      </div>
+      <div class="p-card featured" data-num="04" style="padding:20px 22px;">
+        <h3>In-App Messaging</h3>
+        <p class="p-quote" style="color:#94a3b8;">Real-time chat before booking — no phone needed.</p>
+      </div>
+      <div class="p-card" data-num="05" style="padding:20px 22px;">
+        <h3>Payments</h3>
+        <p class="p-quote">UPI &amp; card-based processing built in.</p>
+      </div>
+      <div class="p-card" data-num="06" style="padding:20px 22px;">
+        <h3>Advanced Filters</h3>
+        <p class="p-quote">Sort by price, distance, and ratings.</p>
+      </div>
+      <div class="p-card" data-num="07" style="padding:20px 22px;">
+        <h3>Admin Dashboard</h3>
+        <p class="p-quote">Verification pipeline &amp; usage analytics.</p>
+      </div>
+      <div class="p-card" data-num="08" style="padding:20px 22px;">
+        <h3>Push Notifications</h3>
+        <p class="p-quote">Booking confirmations and live status updates.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -792,26 +845,53 @@
     <h2>Team — Individual Contributions</h2>
     <div class="sub">Group 124 · IIT Patna</div>
   </div>
-  <div class="slide-body">
-    <div class="team-row">
-      <div class="team-name"><strong>Mayank Saini</strong><span>Full-Stack Engineering &amp; Architecture</span></div>
-      <div class="team-desc">End-to-end system design · Node.js/Express backend · MongoDB schema · Next.js web client · React Native mobile app (navigation, search, FindHelp UI)</div>
-    </div>
-    <div class="team-row">
-      <div class="team-name"><strong>Kavya Saksham</strong><span>Product Strategy &amp; Data Engineering</span></div>
-      <div class="team-desc">Concept ideation · deep-dive market research · validated product-market fit · engineered the database to house the team's competitive edge</div>
-    </div>
-    <div class="team-row">
-      <div class="team-name"><strong>Md Sameer Ansari</strong><span>UX Research &amp; Experience Design</span></div>
-      <div class="team-desc">Field interviews · user journey mapping · designed the mobile interface flow for a seamless service-booking experience for non-tech-savvy users</div>
-    </div>
-    <div class="team-row">
-      <div class="team-name"><strong>Md Sakib</strong><span>Resource &amp; Vendor Management</span></div>
-      <div class="team-desc">High-quality data sourcing · managed and coordinated skilled professionals (electricians, plumbers) to ensure service reliability</div>
-    </div>
-    <div class="team-row">
-      <div class="team-name"><strong>Jatin Saini</strong><span>Project Management &amp; QA</span></div>
-      <div class="team-desc">Sprint coordination · platform-wide functional testing · data integrity · oversaw end-to-end quality across both web and mobile surfaces</div>
+  <div class="slide-body" style="padding-top:16px;">
+    <div style="display:grid;gap:10px;">
+      <div style="display:grid;grid-template-columns:220px 1fr;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+        <div style="background:#0f172a;padding:16px 18px;display:flex;flex-direction:column;justify-content:center;">
+          <span style="font-size:14px;font-weight:800;color:#ffffff;">Mayank Saini</span>
+          <span style="font-size:11px;color:#4ade80;margin-top:3px;font-style:italic;">Full-Stack &amp; Architecture</span>
+        </div>
+        <div style="background:#f8fafc;padding:14px 20px;border-left:4px solid #22c55e;font-size:13px;color:#475569;display:flex;align-items:center;line-height:1.5;">
+          End-to-end system design · Node.js/Express backend · MongoDB schema · Next.js web client · React Native mobile app
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:220px 1fr;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+        <div style="background:#0f172a;padding:16px 18px;display:flex;flex-direction:column;justify-content:center;">
+          <span style="font-size:14px;font-weight:800;color:#ffffff;">Kavya Saksham</span>
+          <span style="font-size:11px;color:#4ade80;margin-top:3px;font-style:italic;">Product &amp; Data Engineering</span>
+        </div>
+        <div style="background:#f8fafc;padding:14px 20px;border-left:4px solid #22c55e;font-size:13px;color:#475569;display:flex;align-items:center;line-height:1.5;">
+          Concept ideation · market research · validated product-market fit · engineered the database competitive edge
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:220px 1fr;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+        <div style="background:#0f172a;padding:16px 18px;display:flex;flex-direction:column;justify-content:center;">
+          <span style="font-size:14px;font-weight:800;color:#ffffff;">Md Sameer Ansari</span>
+          <span style="font-size:11px;color:#4ade80;margin-top:3px;font-style:italic;">UX Research &amp; Design</span>
+        </div>
+        <div style="background:#f8fafc;padding:14px 20px;border-left:4px solid #22c55e;font-size:13px;color:#475569;display:flex;align-items:center;line-height:1.5;">
+          Field interviews · user journey mapping · designed mobile flow for non-tech-savvy service-booking users
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:220px 1fr;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+        <div style="background:#0f172a;padding:16px 18px;display:flex;flex-direction:column;justify-content:center;">
+          <span style="font-size:14px;font-weight:800;color:#ffffff;">Md Sakib</span>
+          <span style="font-size:11px;color:#4ade80;margin-top:3px;font-style:italic;">Resource &amp; Vendor Management</span>
+        </div>
+        <div style="background:#f8fafc;padding:14px 20px;border-left:4px solid #22c55e;font-size:13px;color:#475569;display:flex;align-items:center;line-height:1.5;">
+          High-quality data sourcing · coordinated skilled professionals (electricians, plumbers) for service reliability
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:220px 1fr;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;">
+        <div style="background:#0f172a;padding:16px 18px;display:flex;flex-direction:column;justify-content:center;">
+          <span style="font-size:14px;font-weight:800;color:#ffffff;">Jatin Saini</span>
+          <span style="font-size:11px;color:#4ade80;margin-top:3px;font-style:italic;">Project Management &amp; QA</span>
+        </div>
+        <div style="background:#f8fafc;padding:14px 20px;border-left:4px solid #22c55e;font-size:13px;color:#475569;display:flex;align-items:center;line-height:1.5;">
+          Sprint coordination · platform-wide functional testing · data integrity across web and mobile
+        </div>
+      </div>
     </div>
   </div>
 </section>
