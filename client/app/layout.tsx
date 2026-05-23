@@ -15,6 +15,14 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Around-U",
   description: "AroundU is a hyperlocal platform that helps users find nearby service providers such as plumbers, electricians, carpenters, tutors, mechanics, cleaners, and more. The platform focuses on trust, availability, affordability, and easy access to everyday services.",
+  manifest: "/site.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
